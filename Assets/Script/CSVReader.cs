@@ -25,7 +25,7 @@ public class CSVReader {
         _datas = null;
 
         string fileText = System.IO.File.ReadAllText(filePath);
-
+        
         string[] lines = fileText.Split('\n');
 
         // Récupération du nombre de ligne et de colonne du document.

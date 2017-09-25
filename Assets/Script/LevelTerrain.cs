@@ -353,7 +353,7 @@ public class LevelTerrain : MonoBehaviour {
                     if (_currentSelected)
                         _currentSelected.SetState(CellState.free);
 
-                    selectedCell.SetState(CellState.clicked);
+                    selectedCell.SetState(CellState.selected);
                     _currentSelected = selectedCell;
 
                     HighlightNeighbourgs(_currentSelected, NeighbourgsCount);

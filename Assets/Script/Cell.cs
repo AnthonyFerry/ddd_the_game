@@ -22,7 +22,7 @@ public class Cell : MonoBehaviour {
     {
         get
         {
-            return GetState() != CellState.none && GetState() != CellState.block && GetState() != CellState.occupied && GetState() != CellState.clicked;
+            return GetState() != CellState.none && GetState() != CellState.block && GetState() != CellState.occupied && GetState() != CellState.selected;
         }
     }
 
@@ -55,7 +55,7 @@ public class Cell : MonoBehaviour {
         {
             GetComponent<SpriteRenderer>().color = occupiedColor;
         }
-        else if (state == CellState.clicked)
+        else if (state == CellState.selected)
         {
             GetComponent<SpriteRenderer>().color = clickedColor;
         }
@@ -82,7 +82,7 @@ public enum CellState
 {
     free,
     occupied,
-    clicked,
+    selected,
     neighbourg,
     none,
     block
