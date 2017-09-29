@@ -47,29 +47,43 @@ public class Cell : MonoBehaviour {
 
     void ChangeCaseColor(CellState state)
     {
-        if(state == CellState.free)
+        SpriteRenderer renderer = GetComponent<SpriteRenderer>();
+
+        if (renderer == null)
         {
-            GetComponent<SpriteRenderer>().color = freeColor;
+            Debug.LogError("Le comportement SpriteRenderer n'a pas été trouvé");
+            return;
         }
-        else if (state == CellState.occupied)
+
+        switch(state)
         {
-            GetComponent<SpriteRenderer>().color = occupiedColor;
-        }
-        else if (state == CellState.selected)
-        {
-            GetComponent<SpriteRenderer>().color = clickedColor;
-        }
-        else if (state == CellState.neighbourg)
-        {
-            GetComponent<SpriteRenderer>().color = neighbourgColor;
-        }
-        else if (state == CellState.none)
-        {
-            GetComponent<SpriteRenderer>().color = noneColor;
-        }
-        else if (state == CellState.block)
-        {
-            GetComponent<SpriteRenderer>().color = blockColor;
+            case CellState.none:
+                renderer.color = noneColor;
+                break;
+
+            case CellState.free:
+                renderer.color = freeColor;
+                break;
+
+            case CellState.block:
+                renderer.color = blockColor;
+                break;
+
+            case CellState.selected:
+                renderer.color = clickedColor;
+                break;
+
+            case CellState.occupied:
+                renderer.color = occupiedColor;
+                break;
+
+            case CellState.neighbourg:
+                renderer.color = neighbourgColor;
+                break;
+
+            default:
+                renderer.color = blockColor;
+                break;
         }
     }
 

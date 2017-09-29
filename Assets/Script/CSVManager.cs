@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
 
-public class CSVReader {
+public class CSVManager {
 
     string[,] _datas;
     int _rowCount, _lineCount;
@@ -14,8 +15,8 @@ public class CSVReader {
         get { return _datas[i, j]; }
     }
 
-    public CSVReader() { }
-    public CSVReader(string filePath)
+    public CSVManager() { }
+    public CSVManager(string filePath)
     {
         LoadDatasFromFile(filePath);
     }
@@ -24,7 +25,7 @@ public class CSVReader {
     {
         _datas = null;
 
-        string fileText = System.IO.File.ReadAllText(filePath);
+        string fileText = File.ReadAllText(filePath);
         
         string[] lines = fileText.Split('\n');
 
@@ -39,6 +40,14 @@ public class CSVReader {
                 string value = lines[j].Split(',')[i];
                 _datas[i, j] = value;
             }
+    }
+
+    public void WriteFile(string path, string datas)
+    {
+        if (!File.Exists(path))
+            File.Create(path);
+
+        File.WriteAllText(path, datas);
     }
 
     public string[,] GetDataArray()
