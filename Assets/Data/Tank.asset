@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: Tank
   m_EditorClassIdentifier: 
   ScriptName: Tank
-  Type: TANK
+  Type: Tank
   IsCollider: 1
   moveRange: 2
   attackRange: 1
@@ -20,4 +20,4 @@ MonoBehaviour:
   maxDamages: 950
   armor: 1250
   life: 2000
-  Reference: {fileID: 0}
+  Reference: {fileID: 1703151753482650, guid: d911e8aab353a414a854df329e29dba7, type: 2}

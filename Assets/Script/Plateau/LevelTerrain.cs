@@ -308,10 +308,10 @@ public class LevelTerrain : MonoBehaviour {
         }
     }
 
-    void Start()
+    void Awake()
     {
         _reader = new CSVReader();
-        BuildTerrain(3);
+        //BuildTerrain(3);
     }
 
     void FixedUpdate()

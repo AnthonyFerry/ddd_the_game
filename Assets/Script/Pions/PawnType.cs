@@ -27,8 +27,4 @@ public class PawnType : ScriptableObject
     [Header("What does it looks like ?")]
     public GameObject Reference;
 
-    public bool Match(string type, string subType)
-    {
-        return !string.IsNullOrEmpty(type) && type.Trim() == Type.Trim();
-    }
 }
