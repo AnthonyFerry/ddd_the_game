@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.42824355, g: 0.4619798, b: 0.49104106, a: 1}
+  m_IndirectSpecularColor: {r: 0.42824355, g: 0.46197993, b: 0.49104106, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -108,6 +108,54 @@ NavMeshSettings:
     tileSize: 256
     accuratePlacement: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &189594889
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 189594891}
+  - component: {fileID: 189594890}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &189594890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 189594889}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a347b3223f50dd438ac50e0697c5637, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _terrain: {fileID: 246195786}
+  _pawnTypes:
+  - {fileID: 11400000, guid: 8c518c5453673f74aaf7ba0bdd84a717, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  _pawns: []
+--- !u!4 &189594891
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 189594889}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.4881594, y: 2.9532442, z: -0.119381905}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &223682682
 Prefab:
   m_ObjectHideFlags: 0
@@ -155,6 +203,12 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e83b2f8ce17dae5458994843863960bb, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &246195786 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114962645225468530, guid: e83b2f8ce17dae5458994843863960bb,
+    type: 2}
+  m_PrefabInternal: {fileID: 223682682}
+  m_Script: {fileID: 11500000, guid: 3e1c70eff8cc0fe468b205db3fb804ab, type: 3}
 --- !u!1 &335035914
 GameObject:
   m_ObjectHideFlags: 0
