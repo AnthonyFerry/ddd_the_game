@@ -20,6 +20,9 @@ public class LevelTerrain : MonoBehaviour {
     /// Retourne vrai si le plateau ne comporte aucune case (si il n'est pas chargé)
     /// </summary>
     public bool isEmpty { get { return _lstCells.Count == 0; } }
+    public List<Cell> Cells { get { return _lstCells; } }
+    public int Width { get { return _terrainWidth; } }
+    public int Height { get { return _terrainHeight; } }
 
     // Constantes pour les valeurs de cases.
     const int NONE_CASE = -1;
@@ -47,7 +50,7 @@ public class LevelTerrain : MonoBehaviour {
     int[,] _terrain;
     int _terrainWidth, _terrainHeight;
 
-    CSVReader _reader;
+    CSVManager _reader;
 
     /// <summary>
     /// Initialise les différents paramètre du terrain chargé.
@@ -63,7 +66,7 @@ public class LevelTerrain : MonoBehaviour {
 
     int[,] LoadCSVDatasAsIntArray()
     {
-        if (_reader == null) _reader = new CSVReader();
+        if (_reader == null) _reader = new CSVManager();
 
         // Value pour PC seulement
         string filePath = Application.streamingAssetsPath + "/Maps/Map" + _terrainNumber + ".csv";
@@ -158,7 +161,7 @@ public class LevelTerrain : MonoBehaviour {
         }
     }
 
-    Cell GetCellByPosition(int x, int y)
+    public Cell GetCellByPosition(int x, int y)
     {
         foreach (Cell c in _lstCells)
         {
@@ -308,10 +311,10 @@ public class LevelTerrain : MonoBehaviour {
         }
     }
 
-    void Awake()
+    void Start()
     {
-        _reader = new CSVReader();
-        //BuildTerrain(3);
+        _reader = new CSVManager();
+        BuildTerrain(3);
     }
 
     void FixedUpdate()
