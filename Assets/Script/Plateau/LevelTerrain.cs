@@ -34,7 +34,11 @@ public class LevelTerrain : MonoBehaviour {
     /// </summary>
     const float VERTICAL_INTERVAL = -0.867f;
 
+    [Header("Currently selected cell and pawn")]
+    [SerializeField]
     Cell _currentSelected;
+    [SerializeField]
+    BasePawn _currentSelectedPawn;
 
     /// <summary>
     /// Liste de toutes les cases du plateau.
@@ -44,6 +48,7 @@ public class LevelTerrain : MonoBehaviour {
     /// <summary>
     /// Liste des cases voisine à la case sélectionnée.
     /// </summary>
+    [SerializeField]
     List<Cell> _neighbourgs = new List<Cell>();
 
     int _terrainNumber;
@@ -184,6 +189,13 @@ public class LevelTerrain : MonoBehaviour {
 
     void HighlightNeighbourgs(Cell selectedCase, int index)
     {
+        if (selectedCase.GetState() == CellState.free) {
+            selectedCase.SetState(CellState.neighbourg);
+            _neighbourgs.Add(selectedCase);
+        } else if (selectedCase.GetState() == CellState.selected) {
+            _neighbourgs.Add(selectedCase);
+        }
+
         if (index == 0) return;
 
         // Sommes nous sur une ligne paire ou impaire ?
@@ -201,8 +213,8 @@ public class LevelTerrain : MonoBehaviour {
         {
             if (neighbourg.isAccessible)
             {
-                neighbourg.SetState(CellState.neighbourg);
-                _neighbourgs.Add(neighbourg);
+                //neighbourg.SetState(CellState.neighbourg);
+                //_neighbourgs.Add(neighbourg);
 
                 HighlightNeighbourgs(neighbourg, index - 1);
             }
@@ -219,8 +231,8 @@ public class LevelTerrain : MonoBehaviour {
         {
             if (neighbourg.isAccessible)
             {
-                neighbourg.SetState(CellState.neighbourg);
-                _neighbourgs.Add(neighbourg);
+                //neighbourg.SetState(CellState.neighbourg);
+                //_neighbourgs.Add(neighbourg);
 
                 HighlightNeighbourgs(neighbourg, index - 1);
             }
@@ -237,8 +249,8 @@ public class LevelTerrain : MonoBehaviour {
         {
             if (neighbourg.isAccessible)
             {
-                neighbourg.SetState(CellState.neighbourg);
-                _neighbourgs.Add(neighbourg);
+                //neighbourg.SetState(CellState.neighbourg);
+                //_neighbourgs.Add(neighbourg);
 
                 HighlightNeighbourgs(neighbourg, index - 1);
             }
@@ -255,8 +267,8 @@ public class LevelTerrain : MonoBehaviour {
         {
             if (neighbourg.isAccessible)
             {
-                neighbourg.SetState(CellState.neighbourg);
-                _neighbourgs.Add(neighbourg);
+                //neighbourg.SetState(CellState.neighbourg);
+                //_neighbourgs.Add(neighbourg);
 
                 HighlightNeighbourgs(neighbourg, index - 1);
             }
@@ -273,8 +285,8 @@ public class LevelTerrain : MonoBehaviour {
         {
             if (neighbourg.isAccessible)
             {
-                neighbourg.SetState(CellState.neighbourg);
-                _neighbourgs.Add(neighbourg);
+                //neighbourg.SetState(CellState.neighbourg);
+                //_neighbourgs.Add(neighbourg);
 
                 HighlightNeighbourgs(neighbourg, index - 1);
             }
@@ -291,8 +303,8 @@ public class LevelTerrain : MonoBehaviour {
         {
             if (neighbourg.isAccessible)
             {
-                neighbourg.SetState(CellState.neighbourg);
-                _neighbourgs.Add(neighbourg);
+                //neighbourg.SetState(CellState.neighbourg);
+                //_neighbourgs.Add(neighbourg);
 
                 HighlightNeighbourgs(neighbourg, index - 1);
             }
@@ -338,6 +350,7 @@ public class LevelTerrain : MonoBehaviour {
 
             if(Physics.Raycast(ray, out hit))
             {
+                /*
                 Cell selectedCell = hit.collider.GetComponent<Cell>();
 
                 if (selectedCell == null) return;
@@ -360,6 +373,52 @@ public class LevelTerrain : MonoBehaviour {
                     _currentSelected = selectedCell;
 
                     HighlightNeighbourgs(_currentSelected, NeighbourgsCount);
+                }
+                */
+                //*
+                if (hit.collider.GetComponent<BasePawn>() != null)
+                {
+                    BasePawn selectedPawn = hit.collider.GetComponent<BasePawn>();
+
+                    Debug.Log(selectedPawn.gameObject.name + " selected");
+
+                    if (!selectedPawn.isPlayer) return;
+
+                    _currentSelectedPawn = selectedPawn;
+
+                    Cell selectedCell = GetCellByPosition((int)selectedPawn.PawnLocation.x, (int)selectedPawn.PawnLocation.y);
+
+                    ClearNeighbourgs();
+
+                    if (selectedCell == _currentSelected)
+                    {
+                        selectedCell.SetState(CellState.free);
+                        _currentSelected = null;
+                        _currentSelectedPawn = null;
+                        //ClearNeighbourgs();
+                    }
+                    else
+                    {
+                        if (_currentSelected)
+                            _currentSelected.SetState(CellState.free);
+
+                        selectedCell.SetState(CellState.selected);
+                        _currentSelected = selectedCell;
+
+                        HighlightNeighbourgs(_currentSelected, /*NeighbourgsCount*/ selectedPawn.moveRange);
+                    }
+                } else if (hit.collider.GetComponent<Cell>() != null) {
+                    Cell selectedCell = hit.collider.GetComponent<Cell>();
+                    Debug.Log(selectedCell.gameObject.name + " selected");
+                    if (selectedCell.GetState() == CellState.neighbourg)
+                    {
+                        _currentSelectedPawn.moveFunction(new Vector2(selectedCell.transform.position.x, selectedCell.transform.position.z), 
+                                                          new Vector2(selectedCell.x, selectedCell.y));
+                        _currentSelectedPawn = null;
+                        ClearNeighbourgs();
+                        Debug.Log("Good destination");
+                        //selectedCell.SetState(CellState.selected);
+                    }
                 }
             }
         }

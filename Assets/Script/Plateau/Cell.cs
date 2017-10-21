@@ -6,6 +6,7 @@ public class Cell : MonoBehaviour {
 
     public Color freeColor, occupiedColor, clickedColor, neighbourgColor, noneColor, blockColor;
 
+    [SerializeField]
     int _x, _y;
 
     public int x
@@ -26,6 +27,7 @@ public class Cell : MonoBehaviour {
         }
     }
 
+    [SerializeField]
     CellState _state;
 
     public void SetCellCoordinates(int x, int y)

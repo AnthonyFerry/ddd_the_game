@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour {
 	void Start () {
         _terrain.BuildTerrain(3);
         //createPawn(_pawnTypes[0]);
-        createPawn(createPawnData(_pawnTypes[0], new Vector3(0, 0.5f, 0)));
+        createPawn(createPawnData(_pawnTypes[0], new Vector3(0, 0.5f, 0), new Vector2(0,0)));
 	}
 	
 	// Update is called once per frame
@@ -41,10 +41,11 @@ public class GameManager : MonoBehaviour {
 
     }
 
-    PawnData createPawnData(PawnType type, Vector3 loc) {
+    PawnData createPawnData(PawnType type, Vector3 loc, Vector2 board_pos) {
         PawnData newData;
         newData.type = type;
         newData.location = loc;
+        newData.boardPosition = board_pos;
         return newData;
     }
 }
@@ -52,4 +53,5 @@ public class GameManager : MonoBehaviour {
 public struct PawnData {
     public Vector3 location;
     public PawnType type;
+    public Vector2 boardPosition;
 }
