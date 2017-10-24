@@ -166,6 +166,10 @@ public class LevelTerrain : MonoBehaviour {
         }
     }
 
+    public Cell GetCellByPosition(Vector2 pos) {
+        return GetCellByPosition((int) pos.x, (int) pos.y);
+    }
+
     public Cell GetCellByPosition(int x, int y)
     {
         foreach (Cell c in _lstCells)
@@ -394,7 +398,6 @@ public class LevelTerrain : MonoBehaviour {
                     {
                         selectedCell.SetState(CellState.free);
                         _currentSelected = null;
-                        _currentSelectedPawn = null;
                         //ClearNeighbourgs();
                     }
                     else
@@ -405,15 +408,16 @@ public class LevelTerrain : MonoBehaviour {
                         selectedCell.SetState(CellState.selected);
                         _currentSelected = selectedCell;
 
-                        HighlightNeighbourgs(_currentSelected, /*NeighbourgsCount*/ selectedPawn.moveRange);
+                        HighlightNeighbourgs(_currentSelected, selectedPawn.moveRange);
                     }
                 } else if (hit.collider.GetComponent<Cell>() != null) {
                     Cell selectedCell = hit.collider.GetComponent<Cell>();
                     Debug.Log(selectedCell.gameObject.name + " selected");
                     if (selectedCell.GetState() == CellState.neighbourg)
                     {
-                        _currentSelectedPawn.moveFunction(new Vector2(selectedCell.transform.position.x, selectedCell.transform.position.z), 
-                                                          new Vector2(selectedCell.x, selectedCell.y));
+                        //_currentSelectedPawn.moveFunction(new Vector2(selectedCell.transform.position.x, selectedCell.transform.position.z), selectedCell.BoardPosition);
+                        _currentSelectedPawn.moveFunction(selectedCell);
+                        selectedCell = null;
                         _currentSelectedPawn = null;
                         ClearNeighbourgs();
                         Debug.Log("Good destination");

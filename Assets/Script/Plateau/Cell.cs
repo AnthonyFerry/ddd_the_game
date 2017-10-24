@@ -19,6 +19,10 @@ public class Cell : MonoBehaviour {
         get { return _y; }
     }
 
+    public Vector2 BoardPosition {
+        get { return new Vector2(_x, _y); }
+    }
+
     public bool isAccessible
     {
         get

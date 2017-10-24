@@ -27,7 +27,17 @@ public class BasePawn : MonoBehaviour {
     [SerializeField]
     protected Vector3 _worldPosition;
 
+    PawnMovement _movements;
+
+    /// <summary>
+    /// Refers to the position on the gameboard
+    /// </summary>
     public Vector2 PawnLocation { get { return _location; } }
+
+    /// <summary>
+    /// Refers to the real position, understood by Unity
+    /// </summary>
+    public Vector3 WorldPosition { get { return _worldPosition; } }
 
     public virtual void Init(PawnData datum) {
         Type = datum.type;
@@ -41,15 +51,34 @@ public class BasePawn : MonoBehaviour {
         _worldPosition = datum.location;
         _location = datum.boardPosition;
 
+        _movements = gameObject.AddComponent<PawnMovement>();
+        _movements.Init(this, FindObjectOfType<LevelTerrain>());
+
+    }
+
+    public void updateLocation(int Xmod, int Ymod)
+    {
+        _location.x += Xmod;
+        _location.y += Ymod;
     }
 
     // Update is called once per frame
     protected void Update () {
-		
-	}
+        _worldPosition = this.gameObject.transform.position;
+        _movements.InternalUpdate();
+        
+    }
 
-    public void moveFunction(Vector2 newPos, Vector2 nBoardPos) {
-        this.transform.position = new Vector3(newPos.x, 0.5f, newPos.y);
-        _location = nBoardPos;
+    public void moveFunction(Cell destination) {
+        
+        if (destination != null)
+        {
+            Debug.Log(destination.gameObject.name);
+            _movements.NewDestination(destination);
+        }
+        else
+        {
+            Debug.Log("destination given is null");
+        }
     }
 }
