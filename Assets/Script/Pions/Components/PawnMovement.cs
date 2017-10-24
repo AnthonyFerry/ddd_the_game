@@ -9,6 +9,7 @@ public class PawnMovement : MonoBehaviour {
     [SerializeField]
     private bool _hasADestination;
     private bool _isMoving;
+    public float moveSpeed = 5.0f;
     public BasePawn _parent;
     public LevelTerrain _gameBoard;// = FindObjectOfType<LevelTerrain>();
     public Vector3 _wantedLocation;//mid-move location
@@ -42,7 +43,7 @@ public class PawnMovement : MonoBehaviour {
             }
             else
             {
-                _parent.transform.position = Vector3.MoveTowards(_parent.transform.position, _wantedLocation, Time.deltaTime * 5.0f);
+                _parent.transform.position = Vector3.MoveTowards(_parent.transform.position, _wantedLocation, Time.deltaTime * moveSpeed);
             }
             
             return false;
