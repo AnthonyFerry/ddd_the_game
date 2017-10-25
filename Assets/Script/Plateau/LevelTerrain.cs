@@ -57,6 +57,8 @@ public class LevelTerrain : MonoBehaviour {
 
     CSVManager _reader;
 
+    public GameManager _manager;
+
     /// <summary>
     /// Initialise les différents paramètre du terrain chargé.
     /// </summary>
@@ -164,6 +166,8 @@ public class LevelTerrain : MonoBehaviour {
                 _lstCells.Add(newCell);
             }
         }
+
+        //refreshOccupationMap();
     }
 
     public Cell GetCellByPosition(Vector2 pos) {
@@ -189,6 +193,7 @@ public class LevelTerrain : MonoBehaviour {
         }
 
         _neighbourgs.Clear();
+        //refreshOccupationMap();
     }
 
     void HighlightNeighbourgs(Cell selectedCase, int index)
@@ -327,10 +332,22 @@ public class LevelTerrain : MonoBehaviour {
         }
     }
 
+    public void refreshOccupationMap() {
+        if (_manager.Pawns.Count > 0) {
+            Cell c;
+            foreach (BasePawn p in _manager.Pawns) {
+                c = GetCellByPosition(p.PawnLocation);
+                if (c != null && c.GetState() != CellState.selected)
+                    c.SetState(CellState.occupied);
+            }
+        }
+    }
+
     void Start()
     {
         _reader = new CSVManager();
         BuildTerrain(3);
+        refreshOccupationMap();
     }
 
     void FixedUpdate()
@@ -354,32 +371,7 @@ public class LevelTerrain : MonoBehaviour {
 
             if(Physics.Raycast(ray, out hit))
             {
-                /*
-                Cell selectedCell = hit.collider.GetComponent<Cell>();
-
-                if (selectedCell == null) return;
-
-                if (!selectedCell.isAccessible) return;
-
-                ClearNeighbourgs();
-
-                if (selectedCell == _currentSelected)
-                {
-                    selectedCell.SetState(CellState.free);
-                    _currentSelected = null;
-                }
-                else
-                {
-                    if (_currentSelected)
-                        _currentSelected.SetState(CellState.free);
-
-                    selectedCell.SetState(CellState.selected);
-                    _currentSelected = selectedCell;
-
-                    HighlightNeighbourgs(_currentSelected, NeighbourgsCount);
-                }
-                */
-                //*
+                
                 if (hit.collider.GetComponent<BasePawn>() != null)
                 {
                     BasePawn selectedPawn = hit.collider.GetComponent<BasePawn>();
@@ -388,17 +380,22 @@ public class LevelTerrain : MonoBehaviour {
 
                     if (!selectedPawn.isPlayer) return;
 
+                    if (_currentSelectedPawn == selectedPawn) return;
+
                     _currentSelectedPawn = selectedPawn;
 
                     Cell selectedCell = GetCellByPosition((int)selectedPawn.PawnLocation.x, (int)selectedPawn.PawnLocation.y);
 
                     ClearNeighbourgs();
+                    
 
                     if (selectedCell == _currentSelected)
                     {
+                        Debug.Log("Cell under SelectedPawn. SelectedCell = "+selectedCell.name+" & currentSelected = "+_currentSelected.name);
                         selectedCell.SetState(CellState.free);
                         _currentSelected = null;
-                        //ClearNeighbourgs();
+                        refreshOccupationMap();
+                        
                     }
                     else
                     {
@@ -408,6 +405,7 @@ public class LevelTerrain : MonoBehaviour {
                         selectedCell.SetState(CellState.selected);
                         _currentSelected = selectedCell;
 
+                        refreshOccupationMap();
                         HighlightNeighbourgs(_currentSelected, selectedPawn.moveRange);
                     }
                 } else if (hit.collider.GetComponent<Cell>() != null) {
@@ -415,13 +413,11 @@ public class LevelTerrain : MonoBehaviour {
                     Debug.Log(selectedCell.gameObject.name + " selected");
                     if (selectedCell.GetState() == CellState.neighbourg)
                     {
-                        //_currentSelectedPawn.moveFunction(new Vector2(selectedCell.transform.position.x, selectedCell.transform.position.z), selectedCell.BoardPosition);
+                        _currentSelected.SetState(CellState.free);
                         _currentSelectedPawn.moveFunction(selectedCell);
                         selectedCell = null;
                         _currentSelectedPawn = null;
                         ClearNeighbourgs();
-                        Debug.Log("Good destination");
-                        //selectedCell.SetState(CellState.selected);
                     }
                 }
             }

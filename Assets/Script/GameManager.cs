@@ -17,12 +17,18 @@ public class GameManager : MonoBehaviour {
     [Header("A list of the pawns currently played")]
     List<BasePawn> _pawns = null;
 
+    public List<BasePawn> Pawns {
+        get { return _pawns; }
+    }
+
 	// Use this for initialization
 	void Start () {
+        _terrain._manager = this;
         _terrain.BuildTerrain(3);
         //createPawn(_pawnTypes[0]);
-        createPawn(createPawnData(_pawnTypes[0], new Vector3(0, 0.5f, 0), new Vector2(0,0)));
-	}
+        createPawn(createPawnData(_pawnTypes[0], new Vector3(0, 0, 0), new Vector2(0, 0)));
+        createPawn(createPawnData(_pawnTypes[1], _terrain.GetCellByPosition(5, 1).gameObject.transform.position, new Vector2(5, 1)));
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -37,6 +43,7 @@ public class GameManager : MonoBehaviour {
         _pawns.Add(newBasePawn);
 
         character.name = datum.type.Type + "_" + _pawns.Count;
+        _terrain.GetCellByPosition(datum.boardPosition).SetState(CellState.occupied);
         newBasePawn.Init(datum);
 
     }

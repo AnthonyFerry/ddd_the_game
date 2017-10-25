@@ -138,10 +138,10 @@ MonoBehaviour:
   _terrain: {fileID: 246195786}
   _pawnTypes:
   - {fileID: 11400000, guid: 8c518c5453673f74aaf7ba0bdd84a717, type: 2}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 94ff37f385f5bd543b9742c0409185eb, type: 2}
+  - {fileID: 11400000, guid: 7036241008aa26841b9f0297bfa94e91, type: 2}
+  - {fileID: 11400000, guid: 410c9724465941646a1febd3bb0d19a7, type: 2}
+  - {fileID: 11400000, guid: 4aaf4131f08ca68499fad2fdb02eb563, type: 2}
   _pawns: []
 --- !u!4 &189594891
 Transform:
