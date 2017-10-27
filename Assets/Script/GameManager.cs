@@ -10,6 +10,10 @@ public class GameManager : MonoBehaviour {
     LevelTerrain _terrain;
 
     [SerializeField]
+    [Header("The interface")]
+    UI_Management _interface;
+
+    [SerializeField]
     [Header("A list of the pawn types we can use in our game")]
     List<PawnType> _pawnTypes = null;
 
@@ -28,6 +32,7 @@ public class GameManager : MonoBehaviour {
         //createPawn(_pawnTypes[0]);
         createPawn(createPawnData(_pawnTypes[0], new Vector3(0, 0, 0), new Vector2(0, 0)));
         createPawn(createPawnData(_pawnTypes[1], _terrain.GetCellByPosition(5, 1).gameObject.transform.position, new Vector2(5, 1)));
+        _interface.Init(this);
     }
 	
 	// Update is called once per frame
