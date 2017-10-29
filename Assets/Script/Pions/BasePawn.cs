@@ -10,6 +10,7 @@ public class BasePawn : MonoBehaviour {
 
     [Header("Life values")]
     public int health = 0;
+    int maxHealth = 0;
     public int armor = 0;
 
     [Header("Movement values")]
@@ -28,6 +29,7 @@ public class BasePawn : MonoBehaviour {
     protected Vector3 _worldPosition;
 
     PawnMovement _movements;
+    UI_Pawn_Icon _icon;
 
     /// <summary>
     /// Refers to the position on the gameboard
@@ -41,7 +43,7 @@ public class BasePawn : MonoBehaviour {
 
     public virtual void Init(PawnData datum) {
         Type = datum.type;
-        health = Type.life;
+        maxHealth = health = Type.life;
         armor = Type.armor;
         moveRange = Type.moveRange;
         attackRange = Type.attackRange;
@@ -51,6 +53,7 @@ public class BasePawn : MonoBehaviour {
         _worldPosition = datum.location;
         _location = datum.boardPosition;
 
+        _icon = UI_Management.Instance.createIcon(this, isPlayer);
         _movements = gameObject.AddComponent<PawnMovement>();
         _movements.Init(this, FindObjectOfType<LevelTerrain>());
 
@@ -80,5 +83,10 @@ public class BasePawn : MonoBehaviour {
         {
             Debug.Log("destination given is null");
         }
+    }
+
+    public void takeDamages(int dmg) {
+        health -= dmg;
+        _icon.updateDamages(health);
     }
 }

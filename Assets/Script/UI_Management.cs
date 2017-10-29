@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
 
-public class UI_Management : MonoBehaviour {
+public class UI_Management : SwissArmyKnife.Singleton<UI_Management> {
 
     GameManager _manager;
 
@@ -11,22 +11,15 @@ public class UI_Management : MonoBehaviour {
     public GameObject _enemyPanel;
     public GameObject _iconReference;
 
+    public Color _playerColor;
+    public Color _enemyColor;
+    public Color _testColor;
+
     public List<UI_Pawn_Icon> _iconsPlayer = new List<UI_Pawn_Icon>();
     public List<UI_Pawn_Icon> _iconsEnemy = new List<UI_Pawn_Icon>();
 
     public void Init(GameManager man) {
         _manager = man;
-        foreach (BasePawn bp in _manager.Pawns) {
-            if (bp.isPlayer)
-            {
-                _iconsPlayer.Add(createIcon(bp, true));
-            }
-            else
-            {
-                _iconsEnemy.Add(createIcon(bp, false));
-            }
-        }
-
     }
 
 	// Use this for initialization
@@ -39,7 +32,7 @@ public class UI_Management : MonoBehaviour {
 		
 	}
 
-    UI_Pawn_Icon createIcon(BasePawn parent, bool owner)
+    public UI_Pawn_Icon createIcon(BasePawn parent, bool owner)
     {
         UI_Pawn_Icon nv;
         GameObject no;
@@ -49,29 +42,27 @@ public class UI_Management : MonoBehaviour {
             no.transform.localPosition = new Vector3(0, 350 - _iconsPlayer.Count * 175, 0);
             no.name = "Icon_" + parent.gameObject.name;
             nv = no.AddComponent<UI_Pawn_Icon>();
-            nv._color = new Color(12, 212, 195, 255);
+            nv._parent = parent;
+            nv._isPlayer = owner;
+            nv._maxLife = nv._life = parent.health;
+            nv._color = _playerColor;
+            //nv._color = _testColor;
+            nv.Init();
+            _iconsPlayer.Add(nv);
         } else {
             no = Instantiate(_iconReference, _enemyPanel.transform);
             no.transform.localPosition = new Vector3(0, 350 - _iconsEnemy.Count * 175, 0);
             no.name = "Icon_" + parent.gameObject.name;
             nv = no.AddComponent<UI_Pawn_Icon>();
-            nv._color = new Color(203, 19, 19, 255);
+            nv._parent = parent;
+            nv._isPlayer = owner;
+            nv._maxLife = nv._life = parent.health;
+            nv._color = _enemyColor;
+            nv.Init();
+            _iconsEnemy.Add(nv);
         }
-        nv._parent = parent;
-        nv._isPlayer = owner;
-        nv._maxLife = nv._life = parent.health;
 
         return nv;
     }
 
-}
-
-[SerializeField]
-public struct Icons {
-    public GameObject _object;
-    public BasePawn _parent;
-    public bool _isPlayer;
-    public Color _color;
-    public int _life;
-    public int _maxLife;
 }
