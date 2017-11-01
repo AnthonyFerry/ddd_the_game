@@ -545,7 +545,10 @@ public class LevelTerrain : MonoBehaviour {
                         _currentSelectedPawn = selectedPawn;
                     } else {
                         if(selectedCell.GetState() == CellState.attackable)
-                            selectedPawn.takeDamages(_currentSelectedPawn.dealDamages());
+                            if (!selectedPawn.takeDamages(_currentSelectedPawn.dealDamages(selectedPawn.PawnType)))
+                                _manager.destroyPawn(selectedPawn);
+                        _currentSelected = null;
+                        _currentSelectedPawn = null;
                         ClearNeighbourgs();
                         refreshOccupationMap();
                         return;

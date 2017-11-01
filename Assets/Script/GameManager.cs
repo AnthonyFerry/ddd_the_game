@@ -29,7 +29,6 @@ public class GameManager : MonoBehaviour {
 	void Start () {
         _terrain._manager = this;
         _terrain.BuildTerrain(3);
-        //createPawn(_pawnTypes[0]);
         createPawn(createPawnData(_pawnTypes[0], new Vector3(0, 0, 0), new Vector2(0, 0), true));
         createPawn(createPawnData(_pawnTypes[1], _terrain.GetCellByPosition(5, 1).gameObject.transform.position, new Vector2(5, 1), true));
         createPawn(createPawnData(_pawnTypes[2], _terrain.GetCellByPosition(5, 3).gameObject.transform.position, new Vector2(5, 3), false));
@@ -61,6 +60,12 @@ public class GameManager : MonoBehaviour {
         newData.boardPosition = board_pos;
         newData.isPlayer = player;
         return newData;
+    }
+
+    public void destroyPawn(BasePawn p) {
+        _terrain.GetCellByPosition(p.PawnLocation).SetState(CellState.free);
+        Destroy(p.gameObject);
+        _pawns.Remove(p);
     }
 
     public bool isPawnExisting(int x, int y) { return isPawnExisting(new Vector2(x, y)); }

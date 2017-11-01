@@ -24,6 +24,10 @@ public class PawnType : ScriptableObject
     public int armor;
     public int life;
 
+    [Header("What are its weaknesses and strengths ?")]
+    public string[] weakness = new string[2];
+    public string[] strength = new string[2];
+
     [Header("What does it looks like ?")]
     public GameObject Reference;
 

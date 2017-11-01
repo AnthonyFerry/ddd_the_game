@@ -18,6 +18,12 @@ MonoBehaviour:
   attackRange: 6
   minDamages: 1100
   maxDamages: 1250
-  armor: 250
+  armor: 450
   life: 1350
+  weakness:
+  - Assassin
+  - Wizard
+  strength:
+  - Winged
+  - Tank
   Reference: {fileID: 1703151753482650, guid: d911e8aab353a414a854df329e29dba7, type: 2}

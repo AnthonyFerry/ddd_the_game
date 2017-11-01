@@ -20,4 +20,10 @@ MonoBehaviour:
   maxDamages: 1550
   armor: 150
   life: 750
+  weakness:
+  - Winged
+  - Wizard
+  strength:
+  - Archer
+  - Tank
   Reference: {fileID: 1703151753482650, guid: d911e8aab353a414a854df329e29dba7, type: 2}

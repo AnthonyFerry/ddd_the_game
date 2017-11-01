@@ -41,6 +41,11 @@ public class BasePawn : MonoBehaviour {
     /// </summary>
     public Vector3 WorldPosition { get { return _worldPosition; } }
 
+    /// <summary>
+    /// To get the specific type of a BasePawn
+    /// </summary>
+    public string PawnType { get { return Type.Type; } }
+
     public virtual void Init(PawnData datum) {
         Type = datum.type;
         maxHealth = health = Type.life;
@@ -86,17 +91,31 @@ public class BasePawn : MonoBehaviour {
         }
     }
 
-    public void takeDamages(int dmg) {
+    public bool takeDamages(int dmg) {
         Debug.Log(this.name + " health before taking damages is " + health);
         Debug.Log(this.name + " protection is " + (armor * 2));
         health = health - (dmg - (armor * 2));
         Debug.Log(this.name + " health after calcul is " + health);
         _icon.updateDamages(health);
+
+        if (health <= 0) {
+            Debug.Log("Oh no ! "+this.name+" has been destroyed !");
+            return false;
+        }
+        return true;
     }
 
-    public int dealDamages()
+    public int dealDamages(string target)
     {
-        int dmg = Mathf.FloorToInt(Random.Range(minDamages, maxDamages));
+        float multi = 1.0f;
+        if (target == Type.strength[0] || target == Type.strength[1]) {
+            multi = 1.25f;
+            Debug.Log("target is weak !");
+        } else if (target == Type.weakness[0] || target == Type.weakness[1]) {
+            multi = 0.75f;
+            Debug.Log("target is too strong...");
+        }
+        int dmg = Mathf.FloorToInt(Random.Range(minDamages, maxDamages) * multi);
         Debug.Log(this.name + " deals some damages : " + dmg);
         return dmg;
     }

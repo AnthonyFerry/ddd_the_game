@@ -20,4 +20,10 @@ MonoBehaviour:
   maxDamages: 800
   armor: 1050
   life: 1750
+  weakness:
+  - Archer
+  - Tank
+  strength:
+  - Assassin
+  - Wizard
   Reference: {fileID: 1703151753482650, guid: d911e8aab353a414a854df329e29dba7, type: 2}
