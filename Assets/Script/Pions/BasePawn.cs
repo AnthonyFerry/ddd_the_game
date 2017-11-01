@@ -49,6 +49,7 @@ public class BasePawn : MonoBehaviour {
         attackRange = Type.attackRange;
         minDamages = Type.minDamages;
         maxDamages = Type.maxDamages;
+        isPlayer = datum.isPlayer;
 
         _worldPosition = datum.location;
         _location = datum.boardPosition;
@@ -86,7 +87,17 @@ public class BasePawn : MonoBehaviour {
     }
 
     public void takeDamages(int dmg) {
-        health -= dmg;
+        Debug.Log(this.name + " health before taking damages is " + health);
+        Debug.Log(this.name + " protection is " + (armor * 2));
+        health = health - (dmg - (armor * 2));
+        Debug.Log(this.name + " health after calcul is " + health);
         _icon.updateDamages(health);
+    }
+
+    public int dealDamages()
+    {
+        int dmg = Mathf.FloorToInt(Random.Range(minDamages, maxDamages));
+        Debug.Log(this.name + " deals some damages : " + dmg);
+        return dmg;
     }
 }

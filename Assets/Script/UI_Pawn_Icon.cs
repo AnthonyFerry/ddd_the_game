@@ -9,10 +9,11 @@ public class UI_Pawn_Icon : MonoBehaviour {
     public BasePawn _parent;
     public bool _isPlayer;
     public Color _color;
-    public int _life;
-    public int _maxLife;
+    public float _life;
+    public float _maxLife;
 
     Image _image;
+    public bool _calculateDamages = false;
     
     public void Init () {
         _image = GetChildGameObject(GetChildGameObject(this.gameObject, "Background"), "LoadingBar").GetComponent<Image>();
@@ -31,11 +32,25 @@ public class UI_Pawn_Icon : MonoBehaviour {
     void Update()
     {
 
+        float Phil = _image.fillAmount;
+        float ratioLife = _life / _maxLife;
+
+        if (_image.fillAmount <= ratioLife)
+        {
+            _calculateDamages = false;
+        }
+
+        if (_calculateDamages)
+        {
+            _image.fillAmount = Mathf.MoveTowards(Phil, ratioLife, 0.05f);
+        }
+
     }
 
     public void updateDamages(int actualLife) {
         _life = actualLife;
-        _image.fillAmount = _life / _maxLife;
+        _calculateDamages = true;
+        //_image.fillAmount = _life / _maxLife;
     }
 
     public GameObject GetChildGameObject(GameObject fromGameObject, string withName)

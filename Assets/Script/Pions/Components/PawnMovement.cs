@@ -54,9 +54,10 @@ public class PawnMovement : MonoBehaviour {
         {
             if (_destination == _parent.WorldPosition) {
                 Debug.Log("Party's over, we reached destination");
-                _gameBoard.GetCellByPosition(_gridDest).SetState(CellState.occupied);
+                //_gameBoard.GetCellByPosition(_gridDest).SetState(CellState.occupied);
                 _destination = Vector3.zero;
                 _hasADestination = false;
+                _gameBoard.refreshOccupationMap();
                 return false;
             }
 

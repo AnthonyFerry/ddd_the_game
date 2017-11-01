@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Cell : MonoBehaviour {
 
-    public Color freeColor, occupiedColor, clickedColor, neighbourgColor, noneColor, blockColor;
+    public Color freeColor, occupiedColor, clickedColor, neighbourgColor, noneColor, blockColor, attackColor;
 
     [SerializeField]
     int _x, _y;
@@ -27,7 +27,7 @@ public class Cell : MonoBehaviour {
     {
         get
         {
-            return GetState() != CellState.none && GetState() != CellState.block && GetState() != CellState.occupied && GetState() != CellState.selected;
+            return GetState() != CellState.none && GetState() != CellState.block && GetState() != CellState.occupied && GetState() != CellState.selected && GetState() != CellState.attackable;
         }
     }
 
@@ -87,6 +87,10 @@ public class Cell : MonoBehaviour {
                 renderer.color = neighbourgColor;
                 break;
 
+            case CellState.attackable:
+                renderer.color = attackColor;
+                break;
+
             default:
                 renderer.color = blockColor;
                 break;
@@ -105,5 +109,6 @@ public enum CellState
     selected,
     neighbourg,
     none,
+    attackable,
     block
 }

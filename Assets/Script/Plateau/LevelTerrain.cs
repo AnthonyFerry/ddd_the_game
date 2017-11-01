@@ -166,8 +166,7 @@ public class LevelTerrain : MonoBehaviour {
                 _lstCells.Add(newCell);
             }
         }
-
-        //refreshOccupationMap();
+        
     }
 
     public Cell GetCellByPosition(Vector2 pos) {
@@ -193,7 +192,6 @@ public class LevelTerrain : MonoBehaviour {
         }
 
         _neighbourgs.Clear();
-        //refreshOccupationMap();
     }
 
     void HighlightNeighbourgs(Cell selectedCase, int index)
@@ -201,7 +199,13 @@ public class LevelTerrain : MonoBehaviour {
         if (selectedCase.GetState() == CellState.free) {
             selectedCase.SetState(CellState.neighbourg);
             _neighbourgs.Add(selectedCase);
-        } else if (selectedCase.GetState() == CellState.selected) {
+        } /*else if (selectedCase.GetState() == CellState.occupied) {
+            Debug.Log("occupied cell detected");
+            if (_manager.isPawnExisting(selectedCase.BoardPosition)) {
+                Debug.Log("Pawn detected on this cell");
+                selectedCase.SetState(CellState.attackable);
+            }
+        }*/ else if (selectedCase.GetState() == CellState.selected) {
             _neighbourgs.Add(selectedCase);
         }
 
@@ -321,6 +325,158 @@ public class LevelTerrain : MonoBehaviour {
         }
     }
 
+    void HighlightTargetables(Cell selectedCase, int index) //WIP
+    {
+        //Debug.Log("Enter HighlightTargetables");
+        /*
+        if (selectedCase.GetState() == CellState.occupied) {
+            Debug.Log("occupied cell detected");
+            if (_manager.isPawnExisting(selectedCase.BoardPosition)) {
+                Debug.Log("Pawn detected on this cell");
+                selectedCase.SetState(CellState.attackable);
+            }
+        }
+        */
+        if (index == 0) return;
+
+        // Sommes nous sur une ligne paire ou impaire ?
+        int lineSpec = selectedCase.y % 2 == 0 ? -1 : 1;
+
+        Cell neighbourg;
+
+        //  ___ ___ ___
+        // |___|___|___|
+        // |_X_|_P_|___|
+        // |___|___|___|
+        // 
+        // P = Player, X = case à checker
+        if (neighbourg = GetCellByPosition(selectedCase.x - 1, selectedCase.y))
+        {
+            if (neighbourg.GetState() == CellState.occupied)
+            {
+                BasePawn target = _manager.getPawnByLocation(neighbourg.BoardPosition);
+                if (target != null && !target.isPlayer)
+                {
+                    neighbourg.SetState(CellState.attackable);
+                }
+
+                
+            }
+            HighlightTargetables(neighbourg, index - 1);
+            neighbourg = null;
+        }
+
+        //  ___ ___ ___
+        // |___|___|___|
+        // |___|_P_|_X_|
+        // |___|___|___|
+        // 
+        // P = Player, X = case à checker
+        if (neighbourg = GetCellByPosition(selectedCase.x + 1, selectedCase.y))
+        {
+            if (neighbourg.GetState() == CellState.occupied)
+            {
+                BasePawn target = _manager.getPawnByLocation(neighbourg.BoardPosition);
+                if (target != null && !target.isPlayer)
+                {
+                    neighbourg.SetState(CellState.attackable);
+                }
+
+                
+            }
+            HighlightTargetables(neighbourg, index - 1);
+            neighbourg = null;
+        }
+
+        //  ___ ___ ___
+        // |___|_X_|___|
+        // |___|_P_|___|
+        // |___|___|___|
+        // 
+        // P = Player, X = case à checker
+        if (neighbourg = GetCellByPosition(selectedCase.x, selectedCase.y + 1))
+        {
+            if (neighbourg.GetState() == CellState.occupied)
+            {
+                BasePawn target = _manager.getPawnByLocation(neighbourg.BoardPosition);
+                if (target != null && !target.isPlayer)
+                {
+                    neighbourg.SetState(CellState.attackable);
+                }
+
+                
+            }
+            HighlightTargetables(neighbourg, index - 1);
+            neighbourg = null;
+        }
+
+        //  ___ ___ ___
+        // |___|___|___|
+        // |___|_P_|___|
+        // |___|_X_|___|
+        // 
+        // P = Player, X = case à checker
+        if (neighbourg = GetCellByPosition(selectedCase.x, selectedCase.y - 1))
+        {
+            if (neighbourg.GetState() == CellState.occupied)
+            {
+                BasePawn target = _manager.getPawnByLocation(neighbourg.BoardPosition);
+                if (target != null && !target.isPlayer)
+                {
+                    neighbourg.SetState(CellState.attackable);
+                }
+
+                
+            }
+            HighlightTargetables(neighbourg, index - 1);
+            neighbourg = null;
+        }
+
+        //  ___ ___ ___
+        // |_X_|___|_X_|
+        // |___|_P_|___|
+        // |___|___|___|  En fonction de lineSpec
+        // 
+        // P = Player, X = case à checker
+        if (neighbourg = GetCellByPosition(selectedCase.x + lineSpec, selectedCase.y + 1))
+        {
+            if (neighbourg.GetState() == CellState.occupied)
+            {
+                BasePawn target = _manager.getPawnByLocation(neighbourg.BoardPosition);
+                if (target != null && !target.isPlayer)
+                {
+                    neighbourg.SetState(CellState.attackable);
+                }
+
+                
+            }
+            HighlightTargetables(neighbourg, index - 1);
+            neighbourg = null;
+        }
+
+        //  ___ ___ ___
+        // |___|___|___|
+        // |___|_P_|___|
+        // |_X_|___|_X_|  En fonction de lineSpec
+        // 
+        // P = Player, X = case à checker
+        if (neighbourg = GetCellByPosition(selectedCase.x + lineSpec, selectedCase.y - 1))
+        {
+            if (neighbourg.GetState() == CellState.occupied)
+            {
+                BasePawn target = _manager.getPawnByLocation(neighbourg.BoardPosition);
+                if (target != null && !target.isPlayer)
+                {
+                    neighbourg.SetState(CellState.attackable);
+                }
+
+                
+            }
+            HighlightTargetables(neighbourg, index - 1);
+            neighbourg = null;
+        }
+    }
+
     public void ClearTerrain()
     {
         if (!isEmpty)
@@ -378,16 +534,26 @@ public class LevelTerrain : MonoBehaviour {
 
                     Debug.Log(selectedPawn.gameObject.name + " selected");
 
-                    if (!selectedPawn.isPlayer) return;
+                    
 
                     if (_currentSelectedPawn == selectedPawn) return;
 
-                    _currentSelectedPawn = selectedPawn;
+                    //Cell selectedCell = GetCellByPosition((int)selectedPawn.PawnLocation.x, (int)selectedPawn.PawnLocation.y);
+                    Cell selectedCell = GetCellByPosition(selectedPawn.PawnLocation);
 
-                    Cell selectedCell = GetCellByPosition((int)selectedPawn.PawnLocation.x, (int)selectedPawn.PawnLocation.y);
+                    if (selectedPawn.isPlayer) {
+                        _currentSelectedPawn = selectedPawn;
+                    } else {
+                        if(selectedCell.GetState() == CellState.attackable)
+                            selectedPawn.takeDamages(_currentSelectedPawn.dealDamages());
+                        ClearNeighbourgs();
+                        refreshOccupationMap();
+                        return;
+                    }
+
+                    if (!selectedPawn.isPlayer) return;
 
                     ClearNeighbourgs();
-                    
 
                     if (selectedCell == _currentSelected)
                     {
@@ -407,6 +573,7 @@ public class LevelTerrain : MonoBehaviour {
 
                         refreshOccupationMap();
                         HighlightNeighbourgs(_currentSelected, selectedPawn.moveRange);
+                        HighlightTargetables(_currentSelected, selectedPawn.attackRange);
                     }
                 } else if (hit.collider.GetComponent<Cell>() != null) {
                     Cell selectedCell = hit.collider.GetComponent<Cell>();
@@ -418,6 +585,7 @@ public class LevelTerrain : MonoBehaviour {
                         selectedCell = null;
                         _currentSelectedPawn = null;
                         ClearNeighbourgs();
+                        //refreshOccupationMap();
                     }
                 }
             }

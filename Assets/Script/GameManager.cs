@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour {
 
     [SerializeField]
     [Header("A list of the pawn types we can use in our game")]
-    List<PawnType> _pawnTypes = null;
+    List<PawnType> _pawnTypes = null;    //From 0 to 4 : Tank, Assassin, Archer, Wizard, Winged
 
     [SerializeField]
     [Header("A list of the pawns currently played")]
@@ -30,8 +30,9 @@ public class GameManager : MonoBehaviour {
         _terrain._manager = this;
         _terrain.BuildTerrain(3);
         //createPawn(_pawnTypes[0]);
-        createPawn(createPawnData(_pawnTypes[0], new Vector3(0, 0, 0), new Vector2(0, 0)));
-        createPawn(createPawnData(_pawnTypes[1], _terrain.GetCellByPosition(5, 1).gameObject.transform.position, new Vector2(5, 1)));
+        createPawn(createPawnData(_pawnTypes[0], new Vector3(0, 0, 0), new Vector2(0, 0), true));
+        createPawn(createPawnData(_pawnTypes[1], _terrain.GetCellByPosition(5, 1).gameObject.transform.position, new Vector2(5, 1), true));
+        createPawn(createPawnData(_pawnTypes[2], _terrain.GetCellByPosition(5, 3).gameObject.transform.position, new Vector2(5, 3), false));
         _interface.Init(this);
     }
 	
@@ -53,12 +54,38 @@ public class GameManager : MonoBehaviour {
 
     }
 
-    PawnData createPawnData(PawnType type, Vector3 loc, Vector2 board_pos) {
+    PawnData createPawnData(PawnType type, Vector3 loc, Vector2 board_pos, bool player) {
         PawnData newData;
         newData.type = type;
         newData.location = loc;
         newData.boardPosition = board_pos;
+        newData.isPlayer = player;
         return newData;
+    }
+
+    public bool isPawnExisting(int x, int y) { return isPawnExisting(new Vector2(x, y)); }
+
+    public bool isPawnExisting(Vector2 pos) {
+
+        foreach (BasePawn p in _pawns) {
+            if (p.PawnLocation == pos) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public BasePawn getPawnByLocation(int x, int y) { return getPawnByLocation(new Vector2(x, y)); }
+
+    public BasePawn getPawnByLocation(Vector2 pos) {
+        foreach (BasePawn p in _pawns)
+        {
+            if (p.PawnLocation == pos)
+            {
+                return p;
+            }
+        }
+        return null;
     }
 }
 
@@ -66,4 +93,5 @@ public struct PawnData {
     public Vector3 location;
     public PawnType type;
     public Vector2 boardPosition;
+    public bool isPlayer;
 }
