@@ -194,7 +194,7 @@ public class LevelTerrain : MonoBehaviour {
         _neighbourgs.Clear();
     }
 
-    void HighlightNeighbourgs(Cell selectedCase, int index)
+    void HighlightNeighbourgs(Cell selectedCase, int index, bool isWinged)
     {
         if (selectedCase.GetState() == CellState.free) {
             selectedCase.SetState(CellState.neighbourg);
@@ -224,12 +224,12 @@ public class LevelTerrain : MonoBehaviour {
         // P = Player, X = case à checker
         if (neighbourg = GetCellByPosition(selectedCase.x - 1, selectedCase.y))
         {
-            if (neighbourg.isAccessible)
+            if (neighbourg.isAccessible || isWinged)
             {
                 //neighbourg.SetState(CellState.neighbourg);
                 //_neighbourgs.Add(neighbourg);
 
-                HighlightNeighbourgs(neighbourg, index - 1);
+                HighlightNeighbourgs(neighbourg, index - 1, isWinged);
             }
             neighbourg = null;
         }
@@ -242,12 +242,12 @@ public class LevelTerrain : MonoBehaviour {
         // P = Player, X = case à checker
         if (neighbourg = GetCellByPosition(selectedCase.x + 1, selectedCase.y))
         {
-            if (neighbourg.isAccessible)
+            if (neighbourg.isAccessible || isWinged)
             {
                 //neighbourg.SetState(CellState.neighbourg);
                 //_neighbourgs.Add(neighbourg);
 
-                HighlightNeighbourgs(neighbourg, index - 1);
+                HighlightNeighbourgs(neighbourg, index - 1, isWinged);
             }
             neighbourg = null;
         }
@@ -260,12 +260,12 @@ public class LevelTerrain : MonoBehaviour {
         // P = Player, X = case à checker
         if (neighbourg = GetCellByPosition(selectedCase.x, selectedCase.y + 1))
         {
-            if (neighbourg.isAccessible)
+            if (neighbourg.isAccessible || isWinged)
             {
                 //neighbourg.SetState(CellState.neighbourg);
                 //_neighbourgs.Add(neighbourg);
 
-                HighlightNeighbourgs(neighbourg, index - 1);
+                HighlightNeighbourgs(neighbourg, index - 1, isWinged);
             }
             neighbourg = null;
         }
@@ -278,12 +278,12 @@ public class LevelTerrain : MonoBehaviour {
         // P = Player, X = case à checker
         if (neighbourg = GetCellByPosition(selectedCase.x, selectedCase.y - 1))
         {
-            if (neighbourg.isAccessible)
+            if (neighbourg.isAccessible || isWinged)
             {
                 //neighbourg.SetState(CellState.neighbourg);
                 //_neighbourgs.Add(neighbourg);
 
-                HighlightNeighbourgs(neighbourg, index - 1);
+                HighlightNeighbourgs(neighbourg, index - 1, isWinged);
             }
             neighbourg = null;
         }
@@ -296,12 +296,12 @@ public class LevelTerrain : MonoBehaviour {
         // P = Player, X = case à checker
         if (neighbourg = GetCellByPosition(selectedCase.x + lineSpec, selectedCase.y + 1))
         {
-            if (neighbourg.isAccessible)
+            if (neighbourg.isAccessible || isWinged)
             {
                 //neighbourg.SetState(CellState.neighbourg);
                 //_neighbourgs.Add(neighbourg);
 
-                HighlightNeighbourgs(neighbourg, index - 1);
+                HighlightNeighbourgs(neighbourg, index - 1, isWinged);
             }
             neighbourg = null;
         }
@@ -314,12 +314,12 @@ public class LevelTerrain : MonoBehaviour {
         // P = Player, X = case à checker
         if (neighbourg = GetCellByPosition(selectedCase.x + lineSpec, selectedCase.y - 1))
         {
-            if (neighbourg.isAccessible)
+            if (neighbourg.isAccessible || isWinged)
             {
                 //neighbourg.SetState(CellState.neighbourg);
                 //_neighbourgs.Add(neighbourg);
 
-                HighlightNeighbourgs(neighbourg, index - 1);
+                HighlightNeighbourgs(neighbourg, index - 1, isWinged);
             }
             neighbourg = null;
         }
@@ -575,7 +575,7 @@ public class LevelTerrain : MonoBehaviour {
                         _currentSelected = selectedCell;
 
                         refreshOccupationMap();
-                        HighlightNeighbourgs(_currentSelected, selectedPawn.moveRange);
+                        HighlightNeighbourgs(_currentSelected, selectedPawn.moveRange, selectedPawn.PawnType == "Winged");
                         HighlightTargetables(_currentSelected, selectedPawn.attackRange);
                     }
                 } else if (hit.collider.GetComponent<Cell>() != null) {

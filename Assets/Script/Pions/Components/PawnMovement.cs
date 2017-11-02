@@ -11,7 +11,7 @@ public class PawnMovement : MonoBehaviour {
     private bool _isMoving;
     public float moveSpeed = 5.0f;
     public BasePawn _parent;
-    public LevelTerrain _gameBoard;// = FindObjectOfType<LevelTerrain>();
+    public LevelTerrain _gameBoard;
     public Vector3 _wantedLocation;//mid-move location
 
     public void Init(BasePawn parent, LevelTerrain board)
@@ -148,13 +148,6 @@ public class PawnMovement : MonoBehaviour {
 
         _isMoving = true;
         _wantedLocation = wantedLocation;
-        /*
-        while (_parent.transform.position != wantedLocation) {
-            _isMoving = true;
-            _parent.transform.position = Vector3.MoveTowards(_parent.transform.position, wantedLocation, Time.deltaTime * 0.01f);
-        }
-        _isMoving = false;
-        */
     }
 
     bool TryMoveTo(Vector2 coord)// coord from Board
@@ -227,8 +220,13 @@ public class PawnMovement : MonoBehaviour {
             result.TargetedIndex = 0;
         cellToCheck = _gameBoard.GetCellByPosition(toCheck);
         result.OccupationMap[0] = false;
-        if (cellToCheck != null)
-            result.OccupationMap[0] = cellToCheck.isAccessible;
+        if (cellToCheck != null) {
+            if (_parent.PawnType != "Winged") {
+                result.OccupationMap[0] = cellToCheck.isAccessible;
+            } else {
+                result.OccupationMap[0] = cellToCheck.isFlyable;
+            }
+        }
 
         toCheck.x = parent.x + 1;
         toCheck.y = parent.y;
@@ -237,7 +235,15 @@ public class PawnMovement : MonoBehaviour {
         cellToCheck = _gameBoard.GetCellByPosition(toCheck);
         result.OccupationMap[2] = false;
         if (cellToCheck != null)
-            result.OccupationMap[2] = cellToCheck.isAccessible;
+        {
+            if (_parent.PawnType != "Winged")
+            {
+                result.OccupationMap[2] = cellToCheck.isAccessible;
+            }
+            else {
+                result.OccupationMap[2] = cellToCheck.isFlyable;
+            }
+        }
 
         toCheck.x = parent.x;
         toCheck.y = parent.y + 1;
@@ -246,7 +252,15 @@ public class PawnMovement : MonoBehaviour {
         cellToCheck = _gameBoard.GetCellByPosition(toCheck);
         result.OccupationMap[4] = false;
         if (cellToCheck != null)
-            result.OccupationMap[4] = cellToCheck.isAccessible;
+        {
+            if (_parent.PawnType != "Winged")
+            {
+                result.OccupationMap[4] = cellToCheck.isAccessible;
+            }
+            else {
+                result.OccupationMap[4] = cellToCheck.isFlyable;
+            }
+        }
 
         toCheck.x = parent.x - 1;
         toCheck.y = parent.y;
@@ -255,7 +269,15 @@ public class PawnMovement : MonoBehaviour {
         cellToCheck = _gameBoard.GetCellByPosition(toCheck);
         result.OccupationMap[6] = false;
         if (cellToCheck != null)
-            result.OccupationMap[6] = cellToCheck.isAccessible;
+        {
+            if (_parent.PawnType != "Winged")
+            {
+                result.OccupationMap[6] = cellToCheck.isAccessible;
+            }
+            else {
+                result.OccupationMap[6] = cellToCheck.isFlyable;
+            }
+        }
 
         result.OccupationMap[1] = false;
         result.OccupationMap[3] = false;
@@ -272,7 +294,15 @@ public class PawnMovement : MonoBehaviour {
                 result.TargetedIndex = 7;
             cellToCheck = _gameBoard.GetCellByPosition(toCheck);
             if (cellToCheck != null)
-                result.OccupationMap[7] = cellToCheck.isAccessible;
+            {
+                if (_parent.PawnType != "Winged")
+                {
+                    result.OccupationMap[7] = cellToCheck.isAccessible;
+                }
+                else {
+                    result.OccupationMap[7] = cellToCheck.isFlyable;
+                }
+            }
 
             toCheck.x = parent.x - 1;
             toCheck.y = parent.y + 1;
@@ -280,7 +310,15 @@ public class PawnMovement : MonoBehaviour {
                 result.TargetedIndex = 5;
             cellToCheck = _gameBoard.GetCellByPosition(toCheck);
             if (cellToCheck != null)
-                result.OccupationMap[5] = cellToCheck.isAccessible;
+            {
+                if (_parent.PawnType != "Winged")
+                {
+                    result.OccupationMap[5] = cellToCheck.isAccessible;
+                }
+                else {
+                    result.OccupationMap[5] = cellToCheck.isFlyable;
+                }
+            }
         }
         else
         {
@@ -293,7 +331,15 @@ public class PawnMovement : MonoBehaviour {
                 result.TargetedIndex = 1;
             cellToCheck = _gameBoard.GetCellByPosition(toCheck);
             if (cellToCheck != null)
-                result.OccupationMap[1] = cellToCheck.isAccessible;
+            {
+                if (_parent.PawnType != "Winged")
+                {
+                    result.OccupationMap[1] = cellToCheck.isAccessible;
+                }
+                else {
+                    result.OccupationMap[1] = cellToCheck.isFlyable;
+                }
+            }
 
             toCheck.x = parent.x + 1;
             toCheck.y = parent.y + 1;
@@ -301,7 +347,15 @@ public class PawnMovement : MonoBehaviour {
                 result.TargetedIndex = 3;
             cellToCheck = _gameBoard.GetCellByPosition(toCheck);
             if (cellToCheck != null)
-                result.OccupationMap[3] = cellToCheck.isAccessible;
+            {
+                if (_parent.PawnType != "Winged")
+                {
+                    result.OccupationMap[3] = cellToCheck.isAccessible;
+                }
+                else {
+                    result.OccupationMap[3] = cellToCheck.isFlyable;
+                }
+            }
         }
         
         return result;

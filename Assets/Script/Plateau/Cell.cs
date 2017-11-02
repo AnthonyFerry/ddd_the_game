@@ -31,6 +31,14 @@ public class Cell : MonoBehaviour {
         }
     }
 
+    public bool isFlyable
+    {
+        get
+        {
+            return GetState() != CellState.none;
+        }
+    }
+
     [SerializeField]
     CellState _state;
 

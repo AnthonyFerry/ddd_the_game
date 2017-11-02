@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour {
         createPawn(createPawnData(_pawnTypes[0], new Vector3(0, 0, 0), new Vector2(0, 0), true));
         createPawn(createPawnData(_pawnTypes[1], _terrain.GetCellByPosition(5, 1).gameObject.transform.position, new Vector2(5, 1), true));
         createPawn(createPawnData(_pawnTypes[2], _terrain.GetCellByPosition(5, 3).gameObject.transform.position, new Vector2(5, 3), false));
+        createPawn(createPawnData(_pawnTypes[4], _terrain.GetCellByPosition(3, 6).gameObject.transform.position, new Vector2(3, 6), true));
         _interface.Init(this);
     }
 	
