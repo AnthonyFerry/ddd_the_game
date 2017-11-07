@@ -91,6 +91,10 @@ public class BasePawn : MonoBehaviour {
         }
     }
 
+    public virtual bool atkFunction(BasePawn target) {
+        return target.takeDamages(this.dealDamages(target.PawnType));
+    }
+
     public bool takeDamages(int dmg) {
         Debug.Log(this.name + " health before taking damages is " + health);
         Debug.Log(this.name + " protection is " + (armor * 2));

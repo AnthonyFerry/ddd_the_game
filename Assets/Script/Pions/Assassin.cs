@@ -13,4 +13,9 @@ public class Assassin : BasePawn {
     {
         base.Update();
     }
+
+    public override bool atkFunction(BasePawn target)
+    {
+        return base.atkFunction(target);
+    }
 }

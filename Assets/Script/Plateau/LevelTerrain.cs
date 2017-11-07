@@ -578,7 +578,8 @@ public class LevelTerrain : MonoBehaviour {
                         _currentSelectedPawn = selectedPawn;
                     } else {
                         if(selectedCell.GetState() == CellState.attackable)
-                            if (!selectedPawn.takeDamages(_currentSelectedPawn.dealDamages(selectedPawn.PawnType)))
+                            //if (!selectedPawn.takeDamages(_currentSelectedPawn.dealDamages(selectedPawn.PawnType)))
+                            if (!_currentSelectedPawn.atkFunction(selectedPawn))
                                 _manager.destroyPawn(selectedPawn);
                         _currentSelected = null;
                         _currentSelectedPawn = null;

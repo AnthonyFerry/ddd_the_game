@@ -127,6 +127,28 @@ public class PawnMovement : MonoBehaviour {
         return false;
     }
 
+    public void findNearestDestination(Cell dest) { //Dest refers to the board
+
+        var result = new Neighborhood();
+        result.OccupationMap = new bool[8];
+        result.TargetedIndex = -1;
+        Vector2 loc = dest.BoardPosition;
+        int k = 0;
+
+        for (int i = -1; i <= 1; i++)
+        {
+            for (int j = -1; j <= 1; i++)
+            {
+                if (_gameBoard.GetCellByPosition(loc).isAccessible) {
+                    result.OccupationMap[k] = true;
+                } else {
+                    result.OccupationMap[k] = false;
+                }
+                k += 1;
+            }
+        }
+    }
+
     public void NewDestination(Cell dest) //Dest refers to the board
     {
         //Debug.Log("Enter NewDestination of "+_parent.name);

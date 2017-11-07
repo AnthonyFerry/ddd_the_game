@@ -13,4 +13,9 @@ public class Winged : BasePawn {
     {
         base.Update();
     }
+
+    public override bool atkFunction(BasePawn target)
+    {
+        return base.atkFunction(target);
+    }
 }

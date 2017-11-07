@@ -12,4 +12,9 @@ public class Tank : BasePawn {
     new void Update () {
         base.Update();
 	}
+
+    public override bool atkFunction(BasePawn target)
+    {
+        return base.atkFunction(target);
+    }
 }
