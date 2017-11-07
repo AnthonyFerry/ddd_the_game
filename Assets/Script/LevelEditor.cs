@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using CommonTools;
 
 public class LevelEditor : MonoBehaviour {
 
@@ -21,6 +22,7 @@ public class LevelEditor : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        /*
 		if (Input.GetKeyDown(KeyCode.Return))
         {
             string fileData = "";
@@ -65,7 +67,8 @@ public class LevelEditor : MonoBehaviour {
             _reader.WriteFile("C:/Users/Anthony Ferry/Desktop/TestDeMesCouilles.csv", fileData);
             
         }
-	}
+    */
+    }
 }
 
 

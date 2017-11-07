@@ -1,9 +1,42 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using CommonTools;
 
 #if UNITY_EDITOR
 using UnityEditor;
+
+[CustomEditor(typeof(LevelTerrain))]
+public class LevelTerrainEditor : Editor
+{
+    public override void OnInspectorGUI()
+    {
+
+        LevelTerrain _lt = (LevelTerrain)target;
+
+        int levelCount = System.IO.Directory.GetFiles(Application.streamingAssetsPath + "/", "*.csv", System.IO.SearchOption.AllDirectories).Length;
+
+        EditorGUILayout.BeginHorizontal();
+        for (int i = 1; i <= levelCount; i++)
+        {
+            string levelName = "lvl " + i;
+            if (GUILayout.Button(levelName))
+            {
+                _lt.BuildTerrain(i);
+                Debug.Log(i);
+            }
+        }
+        EditorGUILayout.EndHorizontal();
+
+        if (GUILayout.Button("Clear level"))
+        {
+            _lt.ClearTerrain();
+        }
+
+
+        DrawDefaultInspector();
+    }
+}
 #endif
 
 public class LevelTerrain : MonoBehaviour {
@@ -67,22 +100,23 @@ public class LevelTerrain : MonoBehaviour {
 
         _terrain = LoadCSVDatasAsIntArray();
 
-        _terrainWidth = _reader.RowCount;
+        _terrainWidth = _reader.ColumnCount;
         _terrainHeight = _reader.LineCount;
     }
 
     int[,] LoadCSVDatasAsIntArray()
     {
-        if (_reader == null) _reader = new CSVManager();
+        TextAsset file = (TextAsset)Resources.Load("Map3") as TextAsset;
+        string fileText = file.text;
 
-        // Value pour PC seulement
-        string filePath = Application.streamingAssetsPath + "/Maps/Map" + _terrainNumber + ".csv";
-        _reader.LoadDatasFromFile(filePath);
+        Debug.Log(fileText);
 
-        int[,] intDatas = new int[_reader.RowCount, _reader.LineCount];
+        if (_reader == null) _reader = new CSVManager(fileText, false);
+
+        int[,] intDatas = new int[_reader.ColumnCount, _reader.LineCount];
 
         for (int i = 0; i < _reader.LineCount; i++)
-            for (int j = 0; j < _reader.RowCount; j++)
+            for (int j = 0; j < _reader.ColumnCount; j++)
                 intDatas[i, j] = int.Parse(_reader[i, j]);
 
         return intDatas;
@@ -501,7 +535,6 @@ public class LevelTerrain : MonoBehaviour {
 
     void Start()
     {
-        _reader = new CSVManager();
         BuildTerrain(3);
         refreshOccupationMap();
     }
@@ -593,37 +626,5 @@ public class LevelTerrain : MonoBehaviour {
                 }
             }
         }
-    }
-}
-
-[CustomEditor(typeof(LevelTerrain))]
-public class LevelTerrainEditor : Editor
-{ 
-    public override void OnInspectorGUI()
-    {
-
-        LevelTerrain _lt = (LevelTerrain)target;
-
-        int levelCount = System.IO.Directory.GetFiles(Application.streamingAssetsPath + "/", "*.csv", System.IO.SearchOption.AllDirectories).Length;
-
-        EditorGUILayout.BeginHorizontal();
-        for (int i = 1; i <= levelCount; i++)
-        {
-            string levelName = "lvl " + i;
-            if (GUILayout.Button(levelName))
-            {
-                _lt.BuildTerrain(i);
-                Debug.Log(i);
-            }
-        }
-        EditorGUILayout.EndHorizontal();
-
-        if (GUILayout.Button("Clear level"))
-        {
-            _lt.ClearTerrain();
-        }
-        
-
-        DrawDefaultInspector();
     }
 }
