@@ -16,6 +16,8 @@ public class Assassin : BasePawn {
 
     public override bool atkFunction(BasePawn target)
     {
+        //if not next to the target, can move to the closer position
+        //moveFunction(_movements.findNearestDestination(target.PawnLocation));
         return base.atkFunction(target);
     }
 }

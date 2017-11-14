@@ -30,6 +30,7 @@ public class BasePawn : MonoBehaviour {
     protected Vector3 _worldPosition;
 
     protected PawnMovement _movements;
+    protected LevelTerrain _terrain;
     UI_Pawn_Icon _icon;
 
     /// <summary>
@@ -62,8 +63,9 @@ public class BasePawn : MonoBehaviour {
         _location = datum.boardPosition;
 
         _icon = UI_Management.Instance.createIcon(this, isPlayer);
+        _terrain = FindObjectOfType<LevelTerrain>();
         _movements = gameObject.AddComponent<PawnMovement>();
-        _movements.Init(this, FindObjectOfType<LevelTerrain>());
+        _movements.Init(this, _terrain);
 
     }
 
