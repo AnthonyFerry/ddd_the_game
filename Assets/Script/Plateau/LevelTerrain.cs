@@ -359,18 +359,9 @@ public class LevelTerrain : MonoBehaviour {
         }
     }
 
-    void HighlightTargetables(Cell selectedCase, int index) //WIP
+    void HighlightTargetables(Cell selectedCase, int index, AtkSys atk)
     {
-        //Debug.Log("Enter HighlightTargetables");
-        /*
-        if (selectedCase.GetState() == CellState.occupied) {
-            Debug.Log("occupied cell detected");
-            if (_manager.isPawnExisting(selectedCase.BoardPosition)) {
-                Debug.Log("Pawn detected on this cell");
-                selectedCase.SetState(CellState.attackable);
-            }
-        }
-        */
+        
         if (index == 0) return;
 
         // Sommes nous sur une ligne paire ou impaire ?
@@ -396,7 +387,9 @@ public class LevelTerrain : MonoBehaviour {
 
                 
             }
-            HighlightTargetables(neighbourg, index - 1);
+
+            if(neighbourg.isAccessible || atk == AtkSys.Ranged)
+                HighlightTargetables(neighbourg, index - 1, atk);
             neighbourg = null;
         }
 
@@ -418,7 +411,9 @@ public class LevelTerrain : MonoBehaviour {
 
                 
             }
-            HighlightTargetables(neighbourg, index - 1);
+
+            if (neighbourg.isAccessible || atk == AtkSys.Ranged)
+                HighlightTargetables(neighbourg, index - 1, atk);
             neighbourg = null;
         }
 
@@ -440,7 +435,9 @@ public class LevelTerrain : MonoBehaviour {
 
                 
             }
-            HighlightTargetables(neighbourg, index - 1);
+
+            if (neighbourg.isAccessible || atk == AtkSys.Ranged)
+                HighlightTargetables(neighbourg, index - 1, atk);
             neighbourg = null;
         }
 
@@ -462,7 +459,9 @@ public class LevelTerrain : MonoBehaviour {
 
                 
             }
-            HighlightTargetables(neighbourg, index - 1);
+
+            if (neighbourg.isAccessible || atk == AtkSys.Ranged)
+                HighlightTargetables(neighbourg, index - 1, atk);
             neighbourg = null;
         }
 
@@ -484,7 +483,9 @@ public class LevelTerrain : MonoBehaviour {
 
                 
             }
-            HighlightTargetables(neighbourg, index - 1);
+
+            if (neighbourg.isAccessible || atk == AtkSys.Ranged)
+                HighlightTargetables(neighbourg, index - 1, atk);
             neighbourg = null;
         }
 
@@ -506,7 +507,9 @@ public class LevelTerrain : MonoBehaviour {
 
                 
             }
-            HighlightTargetables(neighbourg, index - 1);
+
+            if (neighbourg.isAccessible || atk == AtkSys.Ranged)
+                HighlightTargetables(neighbourg, index - 1, atk);
             neighbourg = null;
         }
     }
@@ -610,7 +613,7 @@ public class LevelTerrain : MonoBehaviour {
 
                         refreshOccupationMap();
                         HighlightNeighbourgs(_currentSelected, selectedPawn.moveRange, selectedPawn.PawnType == "Winged");
-                        HighlightTargetables(_currentSelected, selectedPawn.attackRange);
+                        HighlightTargetables(_currentSelected, selectedPawn.attackRange, _currentSelectedPawn.attackType);
                     }
                 } else if (hit.collider.GetComponent<Cell>() != null) {
                     Cell selectedCell = hit.collider.GetComponent<Cell>();

@@ -127,26 +127,50 @@ public class PawnMovement : MonoBehaviour {
         return false;
     }
 
-    public void findNearestDestination(Cell dest) { //Dest refers to the board
+    //WORK IN PROGRESS
+    public Cell findNearestDestination(Vector2 dest) { //Dest refers to the board
 
-        var result = new Neighborhood();
-        result.OccupationMap = new bool[8];
-        result.TargetedIndex = -1;
-        Vector2 loc = dest.BoardPosition;
+        Cell tested = null;
+        Cell nearest = null;
+        bool isPairColumn = (dest.y % 2 == 0);
+        Vector2 mod;
         int k = 0;
 
         for (int i = -1; i <= 1; i++)
         {
-            for (int j = -1; j <= 1; i++)
+            for (int j = -1; j <= 1; j++)
             {
-                if (_gameBoard.GetCellByPosition(loc).isAccessible) {
-                    result.OccupationMap[k] = true;
+                if (i == 0 && j == 0)
+                    continue;
+
+                if (isPairColumn) {
+                    if (i > 0 && (j == -1 || j == 1))
+                        continue;
                 } else {
-                    result.OccupationMap[k] = false;
+                    if (i < 0 && (j == -1 || j == 1))
+                        continue;
                 }
+
+                mod = new Vector2(i, j);
+                tested = _gameBoard.GetCellByPosition(dest + mod);
+
+                if (tested == null)
+                    continue;
+
+                if (tested.GetState() != CellState.neighbourg)
+                    continue;
+                //_neighbours.Add(tested);
+
+                if (k == 0 || (tested.BoardPosition - dest).magnitude < (nearest.BoardPosition - dest).magnitude) {
+                    nearest = tested;
+                }
+
                 k += 1;
             }
         }
+
+        return nearest;
+
     }
 
     public void NewDestination(Cell dest) //Dest refers to the board

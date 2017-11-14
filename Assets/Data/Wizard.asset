@@ -18,6 +18,7 @@ MonoBehaviour:
   attackRange: 3
   minDamages: 975
   maxDamages: 1100
+  attackType: 1
   armor: 100
   life: 900
   weakness:

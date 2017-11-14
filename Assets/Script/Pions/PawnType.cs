@@ -19,6 +19,7 @@ public class PawnType : ScriptableObject
     public int attackRange;
     public int minDamages;
     public int maxDamages;
+    public AtkSys attackType;
 
     [Header("How much resistant is it ?")]
     public int armor;
@@ -31,4 +32,9 @@ public class PawnType : ScriptableObject
     [Header("What does it looks like ?")]
     public GameObject Reference;
 
+}
+
+public enum AtkSys {
+    Contact,
+    Ranged
 }

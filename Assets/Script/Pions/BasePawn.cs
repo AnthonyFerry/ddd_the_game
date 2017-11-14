@@ -7,6 +7,7 @@ public class BasePawn : MonoBehaviour {
     [SerializeField]
     protected PawnType Type;
     public bool isPlayer = true;
+    public AtkSys attackType;
 
     [Header("Life values")]
     public int health = 0;
@@ -28,7 +29,7 @@ public class BasePawn : MonoBehaviour {
     [SerializeField]
     protected Vector3 _worldPosition;
 
-    PawnMovement _movements;
+    protected PawnMovement _movements;
     UI_Pawn_Icon _icon;
 
     /// <summary>
@@ -55,6 +56,7 @@ public class BasePawn : MonoBehaviour {
         minDamages = Type.minDamages;
         maxDamages = Type.maxDamages;
         isPlayer = datum.isPlayer;
+        attackType = Type.attackType;
 
         _worldPosition = datum.location;
         _location = datum.boardPosition;
@@ -95,10 +97,13 @@ public class BasePawn : MonoBehaviour {
         return target.takeDamages(this.dealDamages(target.PawnType));
     }
 
+    /// <summary>
+    /// Called when a Pawn take damages. If return true, the Pawn is still alive. Otherwise, it is destroyed.
+    /// </summary>
     public bool takeDamages(int dmg) {
         Debug.Log(this.name + " health before taking damages is " + health);
         Debug.Log(this.name + " protection is " + (armor * 2));
-        health = health - (dmg - (armor * 2));
+        health = health - (dmg/* - armor*/);
         Debug.Log(this.name + " health after calcul is " + health);
         _icon.updateDamages(health);
 
