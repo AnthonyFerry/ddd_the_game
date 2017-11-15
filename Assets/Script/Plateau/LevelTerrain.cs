@@ -273,7 +273,9 @@ public class LevelTerrain : MonoBehaviour {
                 _lstCells.Add(newCell);
             }
         }
-        
+
+
+        transform.position = new Vector3(-_terrainWidth / 2, 0.2f, _terrainHeight / 2);
     }
 
     public Cell GetCellByPosition(Vector2 pos) {
