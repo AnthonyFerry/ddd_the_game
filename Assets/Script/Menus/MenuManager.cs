@@ -13,6 +13,8 @@ public class MenuManager : MonoBehaviour {
     // Unity lifecycle
     void Start()
     {
+        AudioManager.Play("Main Theme", false, "music");
+
         _currentMenu = GetMenu("main");
         _currentMenu.Initialize();
     }
@@ -59,6 +61,7 @@ public class MenuManager : MonoBehaviour {
 
     void LoadLevel(string levelResource)
     {
+        AudioManager.StopByTag("music");
         MenuDatas.Instance.selectedLevel = levelResource;
         SceneManager.LoadScene(1);
     }
