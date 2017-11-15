@@ -19,7 +19,8 @@ public class Assassin : BasePawn {
         //if not next to the target, can move to the closer position
         //moveFunction(_movements.findNearestDestination(target.PawnLocation));
         //return base.atkFunction(target);
-        return target.takeDamages(this.dealDamages(target.PawnType) * criticalHit);
+        int totalDamages = this.dealDamages(target.PawnType) * criticalHit();
+        return target.takeDamages(totalDamages);
     }
 
     int criticalHit() {
