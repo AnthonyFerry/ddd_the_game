@@ -11,7 +11,6 @@ public class LevelTerrainEditor : Editor
 {
     public override void OnInspectorGUI()
     {
-
         LevelTerrain _lt = (LevelTerrain)target;
 
         int levelCount = System.IO.Directory.GetFiles(Application.streamingAssetsPath + "/", "*.csv", System.IO.SearchOption.AllDirectories).Length;
@@ -61,6 +60,12 @@ public class LevelTerrain : MonoBehaviour {
     const int NONE_CASE = -1;
     const int FREE_CASE = 0;
     const int BLOCK_CASE = 1;
+    const int FIRST_PAWN = 100;
+    const int SECOND_PAWN = 101;
+    const int THIRD_PAWN = 102;
+    const int FOURTH_PAWN = 103;
+    const int FIFTH_PAWN = 104;
+    
 
     /// <summary>
     /// Valeur de décalage vertical des cases du plateau.
@@ -106,7 +111,7 @@ public class LevelTerrain : MonoBehaviour {
 
     int[,] LoadCSVDatasAsIntArray()
     {
-        TextAsset file = (TextAsset)Resources.Load("Map3") as TextAsset;
+        TextAsset file = (TextAsset)Resources.Load(MenuDatas.Instance.selectedLevel) as TextAsset;
         string fileText = file.text;
 
         Debug.Log(fileText);
@@ -122,44 +127,12 @@ public class LevelTerrain : MonoBehaviour {
         return intDatas;
     }
 
-    /// <summary>
-    /// Procedure d'initialisation du plateau pour Android car le chargement par CSV ne fonctionnait pas.
-    /// </summary>
-    void ForAndroid()
-    {
-        _terrainWidth = _terrainHeight = 9;
-        _terrain = new int[9, 9];
-
-
-        for (int i = 0; i < 9; i++)
-        {
-            for (int j = 0; j < 9; j++)
-            {
-                _terrain[i, j] = FREE_CASE;
-            }
-        }
-
-        _terrain[4, 0] = NONE_CASE;
-        _terrain[4, 1] = NONE_CASE;
-        _terrain[4, 2] = BLOCK_CASE;
-        _terrain[4, 6] = BLOCK_CASE;
-        _terrain[4, 7] = NONE_CASE;
-        _terrain[4, 8] = NONE_CASE;
-
-        _terrain[8, 1] = NONE_CASE;
-        _terrain[8, 3] = NONE_CASE;
-        _terrain[8, 5] = NONE_CASE;
-        _terrain[8, 7] = NONE_CASE;
-    }
-
     public void BuildTerrain(int terrainNumber) {
         _terrainNumber = terrainNumber;
 
         // Clear the terrain if there is any 
         if (!isEmpty)
             ClearTerrain();
-
-//      ForAndroid();
 
         InitializeTerrain();
         
@@ -190,6 +163,106 @@ public class LevelTerrain : MonoBehaviour {
 
                     case BLOCK_CASE:
                         newCell.SetState(CellState.block);
+                        break;
+
+                    case FIRST_PAWN:
+                        newCell.SetState(CellState.free);
+                        _lstCells.Add(newCell);
+                        GameManager.Instance.createPawn(
+                            GameManager.Instance.createPawnData(
+                                PlayerTeam.Instance.GetPawn(0), newCell.transform.position, new Vector2(i, j), true
+                            )
+                        );
+                        break;
+
+                    case SECOND_PAWN:
+                        newCell.SetState(CellState.free);
+                        _lstCells.Add(newCell);
+                        GameManager.Instance.createPawn(
+                            GameManager.Instance.createPawnData(
+                                PlayerTeam.Instance.GetPawn(1), newCell.transform.position, new Vector2(i, j), true
+                            )
+                        );
+                        break;
+
+                    case THIRD_PAWN:
+                        newCell.SetState(CellState.free);
+                        _lstCells.Add(newCell);
+                        GameManager.Instance.createPawn(
+                            GameManager.Instance.createPawnData(
+                                PlayerTeam.Instance.GetPawn(2), newCell.transform.position, new Vector2(i, j), true
+                            )
+                        );
+                        break;
+
+                    case FOURTH_PAWN:
+                        newCell.SetState(CellState.free);
+                        _lstCells.Add(newCell);
+                        GameManager.Instance.createPawn(
+                            GameManager.Instance.createPawnData(
+                                PlayerTeam.Instance.GetPawn(3), newCell.transform.position, new Vector2(i, j), true
+                            )
+                        );
+                        break;
+
+                    case FIFTH_PAWN:
+                        newCell.SetState(CellState.free);
+                        _lstCells.Add(newCell);
+                        GameManager.Instance.createPawn(
+                            GameManager.Instance.createPawnData(
+                                PlayerTeam.Instance.GetPawn(4), newCell.transform.position, new Vector2(i, j), true
+                            )
+                        );
+                        break;
+
+                    case 200:
+                        newCell.SetState(CellState.free);
+                        _lstCells.Add(newCell);
+                        GameManager.Instance.createPawn(
+                            GameManager.Instance.createPawnData(
+                                GameManager.Instance.GetPawnData(0), newCell.transform.position, new Vector2(i, j), false
+                            )
+                        );
+                        break;
+
+                    case 201:
+                        newCell.SetState(CellState.free);
+                        _lstCells.Add(newCell);
+                        GameManager.Instance.createPawn(
+                            GameManager.Instance.createPawnData(
+                                GameManager.Instance.GetPawnData(1), newCell.transform.position, new Vector2(i, j), false
+                            )
+                        );
+                        break;
+
+                    case 202:
+                        newCell.SetState(CellState.free);
+                        _lstCells.Add(newCell);
+                        GameManager.Instance.createPawn(
+                            GameManager.Instance.createPawnData(
+                                GameManager.Instance.GetPawnData(2), newCell.transform.position, new Vector2(i, j), false
+                            )
+                        );
+                        break;
+
+                    case 203:
+                        newCell.SetState(CellState.free);
+                        _lstCells.Add(newCell);
+                        GameManager.Instance.createPawn(
+                            GameManager.Instance.createPawnData(
+                                GameManager.Instance.GetPawnData(3), newCell.transform.position, new Vector2(i, j), false
+                            )
+                        );
+                        break;
+
+                    case 204:
+                        newCell.SetState(CellState.free);
+                        _lstCells.Add(newCell);
+                        GameManager.Instance.createPawn(
+                            GameManager.Instance.createPawnData(
+                                GameManager.Instance.GetPawnData(4), newCell.transform.position, new Vector2(i, j), false
+                            )
+                        );
                         break;
 
                     default:

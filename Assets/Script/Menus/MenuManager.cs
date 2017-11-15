@@ -13,8 +13,6 @@ public class MenuManager : MonoBehaviour {
     // Unity lifecycle
     void Start()
     {
-        AudioManager.Play("Main Theme", false, "music");
-
         _currentMenu = GetMenu("main");
         _currentMenu.Initialize();
     }
@@ -61,7 +59,6 @@ public class MenuManager : MonoBehaviour {
 
     void LoadLevel(string levelResource)
     {
-        AudioManager.StopByTag("music");
         MenuDatas.Instance.selectedLevel = levelResource;
         SceneManager.LoadScene(1);
     }
@@ -107,9 +104,4 @@ public class MenuManager : MonoBehaviour {
             }
         }
     }
-    
-    // TODO : Charger le bon niveau en fonction du bouton cliqué.
-    // TODO : Créer les murs de la pièce + texturing.
-    // TODO : Créer texture parchemin pour support plateau.
-
 }

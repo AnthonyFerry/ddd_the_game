@@ -28,12 +28,11 @@ public class GameManager : SwissArmyKnife.Singleton<GameManager> {
 	// Use this for initialization
 	void Start () {
         _terrain._manager = this;
-        _terrain.BuildTerrain(3);
-        createPawn(createPawnData(_pawnTypes[0], new Vector3(0, 0, 0), new Vector2(0, 0), true));
-        createPawn(createPawnData(_pawnTypes[1], _terrain.GetCellByPosition(5, 1).gameObject.transform.position, new Vector2(5, 1), true));
-        createPawn(createPawnData(_pawnTypes[2], _terrain.GetCellByPosition(5, 3).gameObject.transform.position, new Vector2(5, 3), false));
-        createPawn(createPawnData(_pawnTypes[0], _terrain.GetCellByPosition(6, 3).gameObject.transform.position, new Vector2(6, 3), false));
-        createPawn(createPawnData(_pawnTypes[4], _terrain.GetCellByPosition(3, 6).gameObject.transform.position, new Vector2(3, 6), true));
+        //createPawn(createPawnData(_pawnTypes[0], new Vector3(0, 0, 0), new Vector2(0, 0), true));
+        //createPawn(createPawnData(_pawnTypes[1], _terrain.GetCellByPosition(5, 1).gameObject.transform.position, new Vector2(5, 1), true));
+        //createPawn(createPawnData(_pawnTypes[2], _terrain.GetCellByPosition(5, 3).gameObject.transform.position, new Vector2(5, 3), false));
+        //createPawn(createPawnData(_pawnTypes[0], _terrain.GetCellByPosition(6, 3).gameObject.transform.position, new Vector2(6, 3), false));
+        //createPawn(createPawnData(_pawnTypes[4], _terrain.GetCellByPosition(3, 6).gameObject.transform.position, new Vector2(3, 6), true));
         _interface.Init(this);
     }
 	
@@ -42,7 +41,7 @@ public class GameManager : SwissArmyKnife.Singleton<GameManager> {
 		
 	}
 
-    void createPawn(PawnData datum) {
+    public void createPawn(PawnData datum) {
         GameObject character = Instantiate(datum.type.Reference, _terrain.gameObject.transform);
         character.gameObject.transform.position = datum.location;
     
@@ -55,7 +54,7 @@ public class GameManager : SwissArmyKnife.Singleton<GameManager> {
 
     }
 
-    PawnData createPawnData(PawnType type, Vector3 loc, Vector2 board_pos, bool player) {
+    public PawnData createPawnData(PawnType type, Vector3 loc, Vector2 board_pos, bool player) {
         PawnData newData;
         newData.type = type;
         newData.location = loc;
@@ -93,6 +92,11 @@ public class GameManager : SwissArmyKnife.Singleton<GameManager> {
             }
         }
         return null;
+    }
+
+    public PawnType GetPawnData(int index)
+    {
+        return _pawnTypes[index] == null ? null : _pawnTypes[index];
     }
 }
 
