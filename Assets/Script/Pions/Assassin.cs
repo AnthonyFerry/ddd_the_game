@@ -18,6 +18,15 @@ public class Assassin : BasePawn {
     {
         //if not next to the target, can move to the closer position
         //moveFunction(_movements.findNearestDestination(target.PawnLocation));
-        return base.atkFunction(target);
+        //return base.atkFunction(target);
+        return target.takeDamages(this.dealDamages(target.PawnType) * criticalHit);
+    }
+
+    int criticalHit() {
+        if(Mathf.FloorToInt(Random.Range(0.0f, 100.0f)) <= 5) {
+            return 2;
+        } else {
+            return 1;
+        }        
     }
 }
