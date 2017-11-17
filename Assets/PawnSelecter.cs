@@ -11,11 +11,15 @@ public class PawnSelecter : MonoBehaviour {
     [SerializeField]
     Text _name;
 
+    Animator anim;
+
     public int selectedPawn = 0;
 
     public void SelecteNextPawn()
     {
         selectedPawn = selectedPawn + 1 > 4 ? 0 : selectedPawn + 1;
+
+        anim.SetTrigger("Select");
 
         RefreshDisplay();
     }
@@ -40,5 +44,7 @@ public class PawnSelecter : MonoBehaviour {
         selectedPawn = 2;
 
         RefreshDisplay();
+
+        anim = GetComponent<Animator>();
     }
 }
