@@ -4,8 +4,13 @@ using UnityEngine;
 
 public class PlayerTeam : SwissArmyKnife.SingletonPersistent<PlayerTeam> {
 
-    [SerializeField]
-    List<PawnType> playerPawns = new List<PawnType>(5);
+
+    public List<PawnType> playerPawns = new List<PawnType>(5);
+
+    void Start()
+    {
+
+    }
 
     public PawnType GetPawn(int index)
     {

@@ -8,7 +8,9 @@ public class MenuManager : MonoBehaviour {
 
     public List<Menu> menus = new List<Menu>();
     public GameObject buttonPrefab;
+
     Menu _currentMenu = null;
+
 
     // Unity lifecycle
     void Start()

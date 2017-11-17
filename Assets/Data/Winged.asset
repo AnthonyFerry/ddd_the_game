@@ -18,6 +18,7 @@ MonoBehaviour:
   attackRange: 1
   minDamages: 700
   maxDamages: 800
+  attackType: 0
   armor: 1050
   life: 1750
   weakness:
@@ -27,3 +28,4 @@ MonoBehaviour:
   - Assassin
   - Wizard
   Reference: {fileID: 1703151753482650, guid: d911e8aab353a414a854df329e29dba7, type: 2}
+  Picture: {fileID: 21300000, guid: 747dca70080433b448ea6efb4d920a97, type: 3}

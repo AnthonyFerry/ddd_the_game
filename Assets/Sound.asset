@@ -15,7 +15,7 @@ MonoBehaviour:
   defaultClip: {fileID: 8300000, guid: 5e85205a10b8cf344844f4a3183fe924, type: 3}
   clips: []
   loop: 1
-  multiplePlay: 0
+  multiplePlay: 1
   volume: 1
   pan: 0
   pitch: 1

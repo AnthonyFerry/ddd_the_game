@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using System;
 
 [CreateAssetMenu(fileName = "PawnType", menuName = "DDD/PawnType", order = 5)]
@@ -30,7 +31,11 @@ public class PawnType : ScriptableObject
     public string[] strength = new string[2];
 
     [Header("What does it looks like ?")]
+    [Header("On the game")]
     public GameObject Reference;
+
+    [Header("On the UI")]
+    public Sprite Picture;
 
 }
 

@@ -333,7 +333,7 @@ public class LevelTerrain : MonoBehaviour {
         // P = Player, X = case à checker
         if (neighbourg = GetCellByPosition(selectedCase.x - 1, selectedCase.y))
         {
-            if (neighbourg.isAccessible || isWinged)
+            if (neighbourg.isAccessible || (isWinged && neighbourg.isFlyable))
             {
                 //neighbourg.SetState(CellState.neighbourg);
                 //_neighbourgs.Add(neighbourg);
@@ -351,7 +351,7 @@ public class LevelTerrain : MonoBehaviour {
         // P = Player, X = case à checker
         if (neighbourg = GetCellByPosition(selectedCase.x + 1, selectedCase.y))
         {
-            if (neighbourg.isAccessible || isWinged)
+            if (neighbourg.isAccessible || (isWinged && neighbourg.isFlyable))
             {
                 //neighbourg.SetState(CellState.neighbourg);
                 //_neighbourgs.Add(neighbourg);
@@ -369,7 +369,7 @@ public class LevelTerrain : MonoBehaviour {
         // P = Player, X = case à checker
         if (neighbourg = GetCellByPosition(selectedCase.x, selectedCase.y + 1))
         {
-            if (neighbourg.isAccessible || isWinged)
+            if (neighbourg.isAccessible || (isWinged && neighbourg.isFlyable))
             {
                 //neighbourg.SetState(CellState.neighbourg);
                 //_neighbourgs.Add(neighbourg);
@@ -387,7 +387,7 @@ public class LevelTerrain : MonoBehaviour {
         // P = Player, X = case à checker
         if (neighbourg = GetCellByPosition(selectedCase.x, selectedCase.y - 1))
         {
-            if (neighbourg.isAccessible || isWinged)
+            if (neighbourg.isAccessible || (isWinged && neighbourg.isFlyable))
             {
                 //neighbourg.SetState(CellState.neighbourg);
                 //_neighbourgs.Add(neighbourg);
@@ -405,7 +405,7 @@ public class LevelTerrain : MonoBehaviour {
         // P = Player, X = case à checker
         if (neighbourg = GetCellByPosition(selectedCase.x + lineSpec, selectedCase.y + 1))
         {
-            if (neighbourg.isAccessible || isWinged)
+            if (neighbourg.isAccessible || (isWinged && neighbourg.isFlyable))
             {
                 //neighbourg.SetState(CellState.neighbourg);
                 //_neighbourgs.Add(neighbourg);
@@ -423,7 +423,7 @@ public class LevelTerrain : MonoBehaviour {
         // P = Player, X = case à checker
         if (neighbourg = GetCellByPosition(selectedCase.x + lineSpec, selectedCase.y - 1))
         {
-            if (neighbourg.isAccessible || isWinged)
+            if (neighbourg.isAccessible || (isWinged && neighbourg.isFlyable))
             {
                 //neighbourg.SetState(CellState.neighbourg);
                 //_neighbourgs.Add(neighbourg);
