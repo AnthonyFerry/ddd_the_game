@@ -158,7 +158,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _picture: {fileID: 1025303066}
   _name: {fileID: 341870372}
-  selectedPawn: 0
+  _type: {fileID: 0}
 --- !u!95 &77295818
 Animator:
   serializedVersion: 3
@@ -689,11 +689,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerPawns:
-  - {fileID: 11400000, guid: 8c518c5453673f74aaf7ba0bdd84a717, type: 2}
-  - {fileID: 11400000, guid: 94ff37f385f5bd543b9742c0409185eb, type: 2}
-  - {fileID: 11400000, guid: 7036241008aa26841b9f0297bfa94e91, type: 2}
-  - {fileID: 11400000, guid: 4aaf4131f08ca68499fad2fdb02eb563, type: 2}
-  - {fileID: 11400000, guid: 410c9724465941646a1febd3bb0d19a7, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!4 &243061638
 Transform:
   m_ObjectHideFlags: 0
@@ -1464,7 +1464,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _picture: {fileID: 2142771696}
   _name: {fileID: 227873309}
-  selectedPawn: 0
+  _type: {fileID: 0}
 --- !u!95 &513606873
 Animator:
   serializedVersion: 3
@@ -3148,6 +3148,65 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 822895934}
+--- !u!1 &830165873
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 830165875}
+  - component: {fileID: 830165874}
+  m_Layer: 5
+  m_Name: TeamManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &830165874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 830165873}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6da76ca4067203a42b7f8babf24625b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  panel: {fileID: 1963986724}
+  availablePawns:
+  - {fileID: 11400000, guid: 7036241008aa26841b9f0297bfa94e91, type: 2}
+  - {fileID: 11400000, guid: 94ff37f385f5bd543b9742c0409185eb, type: 2}
+  - {fileID: 11400000, guid: 8c518c5453673f74aaf7ba0bdd84a717, type: 2}
+  - {fileID: 11400000, guid: 4aaf4131f08ca68499fad2fdb02eb563, type: 2}
+  - {fileID: 11400000, guid: 410c9724465941646a1febd3bb0d19a7, type: 2}
+  _playerTeam: []
+  _pawnSelectors:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+--- !u!224 &830165875
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 830165873}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 960, y: 632}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &841484336
 GameObject:
   m_ObjectHideFlags: 0
@@ -3197,7 +3256,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _picture: {fileID: 1701873309}
   _name: {fileID: 1823722883}
-  selectedPawn: 0
+  _type: {fileID: 0}
 --- !u!95 &841484339
 Animator:
   serializedVersion: 3
@@ -3470,7 +3529,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _picture: {fileID: 1764218140}
   _name: {fileID: 2037253251}
-  selectedPawn: 0
+  _type: {fileID: 0}
 --- !u!95 &871472755
 Animator:
   serializedVersion: 3
@@ -3836,7 +3895,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1963986726}
+      - m_Target: {fileID: 0}
         m_MethodName: Close
         m_Mode: 6
         m_Arguments:
@@ -4342,6 +4401,46 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 712ca3e90d40b834384f9588ff768808, type: 3}
   m_IsPrefabParent: 0
+--- !u!1 &1041222943
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1041222945}
+  - component: {fileID: 1041222944}
+  m_Layer: 0
+  m_Name: SaveManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1041222944
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1041222943}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bea5a3b57b841f3488cd550e01806238, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1041222945
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1041222943}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1126490858
 Prefab:
   m_ObjectHideFlags: 0
@@ -4908,9 +5007,20 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1963986726}
-        m_MethodName: Close
-        m_Mode: 6
+      - m_Target: {fileID: 830165874}
+        m_MethodName: ValidateTeam
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 1041222944}
+        m_MethodName: Save
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -7358,7 +7468,6 @@ GameObject:
   - component: {fileID: 1963986725}
   - component: {fileID: 1963986728}
   - component: {fileID: 1963986727}
-  - component: {fileID: 1963986726}
   m_Layer: 5
   m_Name: TeamPanel
   m_TagString: Untagged
@@ -7388,30 +7497,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -256, y: -256}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1963986726
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1963986724}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6da76ca4067203a42b7f8babf24625b9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  availablePawns:
-  - {fileID: 11400000, guid: 7036241008aa26841b9f0297bfa94e91, type: 2}
-  - {fileID: 11400000, guid: 94ff37f385f5bd543b9742c0409185eb, type: 2}
-  - {fileID: 11400000, guid: 8c518c5453673f74aaf7ba0bdd84a717, type: 2}
-  - {fileID: 11400000, guid: 4aaf4131f08ca68499fad2fdb02eb563, type: 2}
-  - {fileID: 11400000, guid: 410c9724465941646a1febd3bb0d19a7, type: 2}
-  pawns:
-  - {fileID: 2042062733}
-  - {fileID: 513606872}
-  - {fileID: 841484338}
-  - {fileID: 871472754}
-  - {fileID: 77295817}
-  panel: {fileID: 1963986724}
 --- !u!114 &1963986727
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7883,7 +7968,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _picture: {fileID: 822895937}
   _name: {fileID: 414073263}
-  selectedPawn: 0
+  _type: {fileID: 0}
 --- !u!95 &2042062734
 Animator:
   serializedVersion: 3

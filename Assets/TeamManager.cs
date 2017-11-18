@@ -3,14 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using SwissArmyKnife;
 
-public class TeamManager : Singleton<TeamManager>{
+public class TeamManager : SingletonPersistent<TeamManager>{
 
+    public GameObject panel = null;
+
+    // Liste de tous les pions disponibles dans le jeu.
     public List<PawnType> availablePawns = new List<PawnType>();
-    public List<PawnSelecter> pawns = new List<PawnSelecter>();
-    public GameObject panel;
+    
+    public List<PawnType> playerTeam = new List<PawnType>();
+
+    [SerializeField]
+    PawnSelector[] _pawnSelectors;
 
     void Start()
     {
+        SaveManager.Instance.Load();
+
+        if (panel == null) return;
+
+        _pawnSelectors = panel.GetComponentsInChildren<PawnSelector>();
         DisplayCurrentTeam();
     }
 
@@ -21,31 +32,23 @@ public class TeamManager : Singleton<TeamManager>{
 
     public void ValidateTeam()
     {
-        PlayerTeam.Instance.ClearList();
+        playerTeam.Clear();
 
-        foreach (PawnSelecter pawn in pawns)
+        foreach(var selector in _pawnSelectors)
         {
-            PlayerTeam.Instance.AddPawn(availablePawns[pawn.selectedPawn]);
+            playerTeam.Add(selector.type);
         }
     }
 
-    void DisplayCurrentTeam()
+    public void DisplayCurrentTeam()
     {
-        var team = PlayerTeam.Instance.playerPawns;
-
-        for (int i = 0; i < 5; i++)
+        for(int i = 0; i < 5; i++)
         {
-            pawns[i].SelectPawn(availablePawns.IndexOf(team[i]));
+            _pawnSelectors[i].SelectPawn(availablePawns.IndexOf(playerTeam[i]));
         }
     }
 
     public void Close(bool saveTeam = false)
     {
-        if (saveTeam)
-        {
-            ValidateTeam();
-        }
-
-        panel.SetActive(false);
     }
 }
