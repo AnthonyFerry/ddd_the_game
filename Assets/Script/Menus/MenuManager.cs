@@ -15,6 +15,7 @@ public class MenuManager : MonoBehaviour {
     // Unity lifecycle
     void Start()
     {
+        SaveManager.Instance.LoadProgression();
         _currentMenu = GetMenu("main");
         _currentMenu.Initialize();
     }
@@ -63,6 +64,11 @@ public class MenuManager : MonoBehaviour {
     {
         MenuDatas.Instance.selectedLevel = levelResource;
         SceneManager.LoadScene(1);
+    }
+
+    void OnApplicationQuit()
+    {
+        SaveManager.Instance.SaveProgression();
     }
 
     void GenerateButtons(Menu menu)

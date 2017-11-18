@@ -14,7 +14,7 @@ public class SaveManager : SingletonPersistent<SaveManager> {
     const string THIRD_PAWN = "third";
     const string FOURTH_PAWN = "fourth";
     const string FIFTH_PAWN = "fifth";
-
+    
     // Use this for initialization
     void Start () {
 		
@@ -25,7 +25,7 @@ public class SaveManager : SingletonPersistent<SaveManager> {
 		
 	}
 
-    public void Save()
+    public void SaveTeam()
     {
         var tm = TeamManager.Instance;
 
@@ -36,6 +36,49 @@ public class SaveManager : SingletonPersistent<SaveManager> {
         PlayerPrefs.SetInt(FIFTH_PAWN, tm.availablePawns.IndexOf(tm.playerTeam[4]));
 
         PlayerPrefs.Save();
+    }
+
+    public void SaveProgression()
+    {
+        var worlds = MenuDatas.Instance.worlds;
+
+        int i = 0;
+        int j = 0;
+        int levelCount = 0;
+        for (i = 0; i < worlds.Count; i++)
+        {
+            levelCount = 0;
+
+            PlayerPrefs.SetInt("World" + i, worlds[i].isLocked ? 0 : 1);
+
+            for (j = 0; j < worlds[i].levels.Count; j++)
+            {
+                if (!worlds[i].levels[j].isLocked) levelCount++;
+            }
+
+            PlayerPrefs.SetInt("World" + i + "levels", levelCount);
+        }
+
+        PlayerPrefs.Save();
+    }
+
+    public void LoadProgression()
+    {
+        var worlds = MenuDatas.Instance.worlds;
+
+        int i = 0;
+        int j = 0;
+        for (i = 0; i < worlds.Count; i++)
+        {
+            worlds[i].isLocked = PlayerPrefs.GetInt("World" + i) == 0 ? true : false;
+
+            int levelCount = PlayerPrefs.GetInt("World" + i + "levels");
+
+            for (j = 0; j < worlds[i].levels.Count; j++)
+            {
+                worlds[i].levels[j].isLocked = j < levelCount ? false : true;
+            }
+        }
     }
 
     public void Load()
