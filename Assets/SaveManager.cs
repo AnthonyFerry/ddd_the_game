@@ -3,6 +3,51 @@ using System.Collections.Generic;
 using UnityEngine;
 using SwissArmyKnife;
 
+#if UNITY_EDITOR
+using UnityEditor;
+
+[CustomEditor(typeof(SaveManager))]
+public class SaveManagerEditor : Editor
+{
+    override public void OnInspectorGUI()
+    {
+        SaveManager script = (SaveManager)target;
+
+        GUILayout.BeginHorizontal();
+        GUILayout.BeginVertical();
+        if (GUILayout.Button("Save Progression"))
+        {
+            script.SaveProgression();
+        }
+
+        if (GUILayout.Button("Save Team"))
+        {
+            script.SaveTeam();
+        }
+        GUILayout.EndVertical();
+        GUILayout.BeginVertical();
+        if (GUILayout.Button("Load Progression"))
+        {
+            script.LoadProgression();
+        }
+
+        if (GUILayout.Button("Load Team"))
+        {
+            script.Load();
+        }
+        GUILayout.EndVertical();
+        GUILayout.EndHorizontal();
+
+        if (GUILayout.Button("Clear Datas"))
+        {
+            PlayerPrefs.DeleteAll();
+        }
+
+        DrawDefaultInspector();
+    }
+}
+
+#endif
 
 /// <summary>
 /// Cette classe sert à sauvegarder la progression du joueur. Sont sauvegardés les MenuDatas ainsi que PlayerTeam.

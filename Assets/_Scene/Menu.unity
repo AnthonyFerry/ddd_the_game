@@ -661,52 +661,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 227873307}
---- !u!1 &243061636
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 243061638}
-  - component: {fileID: 243061637}
-  m_Layer: 0
-  m_Name: PlayerTeam
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &243061637
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 243061636}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c3bf29dfad2da5408c24b40bb395fdc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerPawns:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
---- !u!4 &243061638
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 243061636}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &272561043
 GameObject:
   m_ObjectHideFlags: 0
@@ -1511,67 +1465,76 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   worlds:
-  - name: Tutorial
+  - name: Monde 1
     isLocked: 0
     id: 0
     password: 
     levels:
-    - name: 
+    - name: 1
       isLocked: 0
       resourceName: map_00_01
-    - name: 
+    - name: 2
       isLocked: 1
       resourceName: map_00_02
-  - name: Monde 1
+    - name: 3
+      isLocked: 1
+      resourceName: map_00_03
+  - name: Monde 2
     isLocked: 1
     id: 1
     password: MotDePasse1
     levels:
-    - name: Bite jouflue
-      isLocked: 0
-      resourceName: 
-    - name: 
-      isLocked: 0
-      resourceName: 
-    - name: 
-      isLocked: 0
-      resourceName: 
-    - name: 
-      isLocked: 0
-      resourceName: 
-    - name: 
-      isLocked: 0
-      resourceName: 
-    - name: 
-      isLocked: 0
-      resourceName: 
-    - name: 
-      isLocked: 0
-      resourceName: 
-    - name: 
-      isLocked: 0
-      resourceName: 
-    - name: 
-      isLocked: 0
-      resourceName: 
-    - name: 
-      isLocked: 0
-      resourceName: 
-  - name: Monde 2
+    - name: 1
+      isLocked: 1
+      resourceName: map_01_01
+    - name: 2
+      isLocked: 1
+      resourceName: map_01_02
+    - name: 3
+      isLocked: 1
+      resourceName: map_01_03
+  - name: Monde 3
     isLocked: 1
     id: 2
     password: MotDePasse2
-    levels: []
-  - name: Monde 3
+    levels:
+    - name: 1
+      isLocked: 1
+      resourceName: map_02_01
+    - name: 2
+      isLocked: 1
+      resourceName: map_02_02
+    - name: 3
+      isLocked: 1
+      resourceName: map_02_03
+  - name: Monde 4
     isLocked: 1
     id: 3
     password: MotDePasse3
-    levels: []
-  - name: Monde 4
+    levels:
+    - name: 1
+      isLocked: 1
+      resourceName: map_03_01
+    - name: 2
+      isLocked: 1
+      resourceName: map_03_02
+    - name: 3
+      isLocked: 1
+      resourceName: map_03_03
+  - name: Monde 5
     isLocked: 1
     id: 4
     password: MotDePasse4
-    levels: []
+    levels:
+    - name: 1
+      isLocked: 1
+      resourceName: map_04_01
+    - name: 2
+      isLocked: 1
+      resourceName: map_04_02
+    - name: 3
+      isLocked: 1
+      resourceName: map_04_03
   selectedWorld: 0
   selectedLevel: map_00_01
 --- !u!4 &516757120
@@ -3200,7 +3163,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -4450,7 +4413,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1126490858
 Prefab:

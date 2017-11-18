@@ -170,7 +170,7 @@ public class LevelTerrain : MonoBehaviour {
                         _lstCells.Add(newCell);
                         GameManager.Instance.createPawn(
                             GameManager.Instance.createPawnData(
-                                PlayerTeam.Instance.GetPawn(0), newCell.transform.position, new Vector2(i, j), true
+                                TeamManager.Instance.playerTeam[0], newCell.transform.position, new Vector2(i, j), true
                             )
                         );
                         break;
@@ -180,7 +180,7 @@ public class LevelTerrain : MonoBehaviour {
                         _lstCells.Add(newCell);
                         GameManager.Instance.createPawn(
                             GameManager.Instance.createPawnData(
-                                PlayerTeam.Instance.GetPawn(1), newCell.transform.position, new Vector2(i, j), true
+                                TeamManager.Instance.playerTeam[1], newCell.transform.position, new Vector2(i, j), true
                             )
                         );
                         break;
@@ -190,7 +190,7 @@ public class LevelTerrain : MonoBehaviour {
                         _lstCells.Add(newCell);
                         GameManager.Instance.createPawn(
                             GameManager.Instance.createPawnData(
-                                PlayerTeam.Instance.GetPawn(2), newCell.transform.position, new Vector2(i, j), true
+                                TeamManager.Instance.playerTeam[2], newCell.transform.position, new Vector2(i, j), true
                             )
                         );
                         break;
@@ -200,7 +200,7 @@ public class LevelTerrain : MonoBehaviour {
                         _lstCells.Add(newCell);
                         GameManager.Instance.createPawn(
                             GameManager.Instance.createPawnData(
-                                PlayerTeam.Instance.GetPawn(3), newCell.transform.position, new Vector2(i, j), true
+                                TeamManager.Instance.playerTeam[3], newCell.transform.position, new Vector2(i, j), true
                             )
                         );
                         break;
@@ -210,7 +210,7 @@ public class LevelTerrain : MonoBehaviour {
                         _lstCells.Add(newCell);
                         GameManager.Instance.createPawn(
                             GameManager.Instance.createPawnData(
-                                PlayerTeam.Instance.GetPawn(4), newCell.transform.position, new Vector2(i, j), true
+                                TeamManager.Instance.playerTeam[4], newCell.transform.position, new Vector2(i, j), true
                             )
                         );
                         break;

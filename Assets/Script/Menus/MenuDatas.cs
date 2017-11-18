@@ -18,6 +18,12 @@ public class MenuDatas : SingletonPersistent<MenuDatas> {
         return null;
     }
 
+    public void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.A))
+            UnlockNextLevel();
+    }
+
     public World GetWorld(string name)
     {
         foreach (World world in worlds)
@@ -51,6 +57,19 @@ public class MenuDatas : SingletonPersistent<MenuDatas> {
 
         return world;
     }
+
+    public void UnlockNextLevel()
+    {
+        foreach (Level level in worlds[selectedWorld].levels)
+        {
+            if (level.isLocked)
+            {
+                level.isLocked = false;
+                SaveManager.Instance.SaveProgression();
+                return;
+            }
+        }
+    }
 }
 
 [System.Serializable]
@@ -65,6 +84,7 @@ public class World
     public void unlock()
     {
         this.isLocked = false;
+        this.levels[0].isLocked = false;
     }
 }
 

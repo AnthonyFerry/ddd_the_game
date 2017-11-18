@@ -66,11 +66,6 @@ public class MenuManager : MonoBehaviour {
         SceneManager.LoadScene(1);
     }
 
-    void OnApplicationQuit()
-    {
-        SaveManager.Instance.SaveProgression();
-    }
-
     void GenerateButtons(Menu menu)
     {
         if (menu.buttonContainer == null)
@@ -86,7 +81,7 @@ public class MenuManager : MonoBehaviour {
                 var buttonScript = goButton.GetComponent<Button>();
                 var text = buttonScript.GetComponentInChildren<Text>();
                 buttonScript.interactable = !world.isLocked;
-                text.text = world.name;
+                text.text = world.isLocked ? "???" : world.name;
 
                 buttonScript.onClick.AddListener(() => SetSelectedWorld(world.id));
                 buttonScript.onClick.AddListener(() => GoTo("level"));
