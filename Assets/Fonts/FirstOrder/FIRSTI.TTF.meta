@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 57183a1f65614ba43bfddff041e20c60
+timeCreated: 1511085923
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: First Order Italic
+  fontNames:
+  - First Order Italic
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

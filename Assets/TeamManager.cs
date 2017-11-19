@@ -3,17 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using SwissArmyKnife;
 
-public class TeamManager : SingletonPersistent<TeamManager>{
+public class TeamManager : SingletonPersistent<TeamManager> {
 
     public GameObject panel = null;
 
-    // Liste de tous les pions disponibles dans le jeu.
+    // Liste de tous les types de pions disponibles dans le jeu.
     public List<PawnType> availablePawns = new List<PawnType>();
-    
+
+    // Liste des pions détenus par le joueur
     public List<PawnType> playerTeam = new List<PawnType>();
 
     [SerializeField]
-    PawnSelector[] _pawnSelectors;
+    PawnSelector[] _pawnSelectors = new PawnSelector[5];
 
     void Start()
     {
@@ -27,7 +28,7 @@ public class TeamManager : SingletonPersistent<TeamManager>{
 
     void OnEnable()
     {
-        DisplayCurrentTeam();
+        //DisplayCurrentTeam();
     }
 
     public void ValidateTeam()
@@ -44,6 +45,7 @@ public class TeamManager : SingletonPersistent<TeamManager>{
     {
         for(int i = 0; i < 5; i++)
         {
+            Debug.Log(i);
             _pawnSelectors[i].SelectPawn(availablePawns.IndexOf(playerTeam[i]));
         }
     }

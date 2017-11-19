@@ -21,12 +21,29 @@ public class GameManager : SwissArmyKnife.Singleton<GameManager> {
     [Header("A list of the pawns currently played")]
     List<BasePawn> _pawns = null;
 
+    
+    [Header("Useful variables for the party")]
+    [SerializeField] bool _isPlayerTurn = true;
+    [SerializeField] int _nbPlayerPawn = 0;
+    [SerializeField] int _nbEnemyPawn = 0;
+    [SerializeField] bool _locker = false; // Ragnar Lock-Broke !
+
     public List<BasePawn> Pawns {
         get { return _pawns; }
     }
 
+    public bool Locker {
+        get { return _locker; }
+        set { _locker = value; }
+    }
+
+    public bool IsPlayerTurn {
+        get { return _isPlayerTurn; }
+    }
+
 	// Use this for initialization
 	void Start () {
+        _isPlayerTurn = true;
         _terrain._manager = this;
         //createPawn(createPawnData(_pawnTypes[0], new Vector3(0, 0, 0), new Vector2(0, 0), true));
         //createPawn(createPawnData(_pawnTypes[1], _terrain.GetCellByPosition(5, 1).gameObject.transform.position, new Vector2(5, 1), true));
@@ -35,12 +52,32 @@ public class GameManager : SwissArmyKnife.Singleton<GameManager> {
         //createPawn(createPawnData(_pawnTypes[4], _terrain.GetCellByPosition(3, 6).gameObject.transform.position, new Vector2(3, 6), true));
         _interface.Init(this);
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update() {
+        if (_nbPlayerPawn == 0 && _nbEnemyPawn != 0) {
+            //defeat function
+            Debug.Log("Defeat");
+        } else if (_nbEnemyPawn == 0 && _nbPlayerPawn != 0) {
+            //victory function
+            Debug.Log("Victory");
+            MenuDatas.Instance.UnlockNextLevel();
+        }
+
+        if (!_locker) {
+            if (!_isPlayerTurn)
+            {
+                //AI
+                TurnTransition();
+            }
+        }
 		
 	}
 
+    /// <summary>
+    /// The actual function which create a Pawn on the battlefield, using informations provided by a PawnData.
+    /// </summary>
+    /// <param name="datum">The Pawn data that contain... well, all important data</param>
     public void createPawn(PawnData datum) {
         GameObject character = Instantiate(datum.type.Reference, _terrain.gameObject.transform);
         character.gameObject.transform.position = datum.location;
@@ -48,12 +85,21 @@ public class GameManager : SwissArmyKnife.Singleton<GameManager> {
         BasePawn newBasePawn = character.AddComponent(Type.GetType(datum.type.ScriptName)) as BasePawn;
         _pawns.Add(newBasePawn);
 
+        if (datum.isPlayer) {_nbPlayerPawn += 1; } else { _nbEnemyPawn += 1; }
+
         character.name = datum.type.Type + "_" + _pawns.Count;
         _terrain.GetCellByPosition(datum.boardPosition).SetState(CellState.occupied);
         newBasePawn.Init(datum);
 
     }
 
+    /// <summary>
+    /// Function which create a PawnData, mostly useful for pawn creation.
+    /// </summary>
+    /// <param name="type">The PawnType of the Pawn</param>
+    /// <param name="loc">Its location in the world</param>
+    /// <param name="board_pos">Its location on the gameboard</param>
+    /// <param name="player">Does it belong to the player ? True for player, False for AI</param>
     public PawnData createPawnData(PawnType type, Vector3 loc, Vector2 board_pos, bool player) {
         PawnData newData;
         newData.type = type;
@@ -64,6 +110,7 @@ public class GameManager : SwissArmyKnife.Singleton<GameManager> {
     }
 
     public void destroyPawn(BasePawn p) {
+        if (p.isPlayer) { _nbPlayerPawn -= 1; } else { _nbEnemyPawn -= 1; }
         _terrain.GetCellByPosition(p.PawnLocation).SetState(CellState.free);
         Destroy(p.gameObject);
         _pawns.Remove(p);
@@ -97,6 +144,15 @@ public class GameManager : SwissArmyKnife.Singleton<GameManager> {
     public PawnType GetPawnData(int index)
     {
         return _pawnTypes[index] == null ? null : _pawnTypes[index];
+    }
+
+    //called in BasePawn.AtkFunction()
+    public void TurnTransition()
+    {
+        _locker = true;
+        Debug.Log("Locked !");
+        _isPlayerTurn = !_isPlayerTurn;
+        _interface.changingTurn(_isPlayerTurn);
     }
 }
 

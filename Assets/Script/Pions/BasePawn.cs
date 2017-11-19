@@ -96,6 +96,7 @@ public class BasePawn : MonoBehaviour {
     }
 
     public virtual bool atkFunction(BasePawn target) {
+        GameManager.Instance.TurnTransition();
         return target.takeDamages(this.dealDamages(target.PawnType));
     }
 

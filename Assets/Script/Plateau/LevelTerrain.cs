@@ -168,8 +168,8 @@ public class LevelTerrain : MonoBehaviour {
                     case FIRST_PAWN:
                         newCell.SetState(CellState.free);
                         _lstCells.Add(newCell);
-                        GameManager.Instance.createPawn(
-                            GameManager.Instance.createPawnData(
+                        _manager.createPawn(
+                            _manager.createPawnData(
                                 TeamManager.Instance.playerTeam[0], newCell.transform.position, new Vector2(i, j), true
                             )
                         );
@@ -178,8 +178,8 @@ public class LevelTerrain : MonoBehaviour {
                     case SECOND_PAWN:
                         newCell.SetState(CellState.free);
                         _lstCells.Add(newCell);
-                        GameManager.Instance.createPawn(
-                            GameManager.Instance.createPawnData(
+                        _manager.createPawn(
+                            _manager.createPawnData(
                                 TeamManager.Instance.playerTeam[1], newCell.transform.position, new Vector2(i, j), true
                             )
                         );
@@ -188,8 +188,8 @@ public class LevelTerrain : MonoBehaviour {
                     case THIRD_PAWN:
                         newCell.SetState(CellState.free);
                         _lstCells.Add(newCell);
-                        GameManager.Instance.createPawn(
-                            GameManager.Instance.createPawnData(
+                        _manager.createPawn(
+                            _manager.createPawnData(
                                 TeamManager.Instance.playerTeam[2], newCell.transform.position, new Vector2(i, j), true
                             )
                         );
@@ -198,8 +198,8 @@ public class LevelTerrain : MonoBehaviour {
                     case FOURTH_PAWN:
                         newCell.SetState(CellState.free);
                         _lstCells.Add(newCell);
-                        GameManager.Instance.createPawn(
-                            GameManager.Instance.createPawnData(
+                        _manager.createPawn(
+                            _manager.createPawnData(
                                 TeamManager.Instance.playerTeam[3], newCell.transform.position, new Vector2(i, j), true
                             )
                         );
@@ -208,8 +208,8 @@ public class LevelTerrain : MonoBehaviour {
                     case FIFTH_PAWN:
                         newCell.SetState(CellState.free);
                         _lstCells.Add(newCell);
-                        GameManager.Instance.createPawn(
-                            GameManager.Instance.createPawnData(
+                        _manager.createPawn(
+                            _manager.createPawnData(
                                 TeamManager.Instance.playerTeam[4], newCell.transform.position, new Vector2(i, j), true
                             )
                         );
@@ -218,9 +218,9 @@ public class LevelTerrain : MonoBehaviour {
                     case 200:
                         newCell.SetState(CellState.free);
                         _lstCells.Add(newCell);
-                        GameManager.Instance.createPawn(
-                            GameManager.Instance.createPawnData(
-                                GameManager.Instance.GetPawnData(0), newCell.transform.position, new Vector2(i, j), false
+                        _manager.createPawn(
+                            _manager.createPawnData(
+                                _manager.GetPawnData(0), newCell.transform.position, new Vector2(i, j), false
                             )
                         );
                         break;
@@ -228,9 +228,9 @@ public class LevelTerrain : MonoBehaviour {
                     case 201:
                         newCell.SetState(CellState.free);
                         _lstCells.Add(newCell);
-                        GameManager.Instance.createPawn(
-                            GameManager.Instance.createPawnData(
-                                GameManager.Instance.GetPawnData(1), newCell.transform.position, new Vector2(i, j), false
+                        _manager.createPawn(
+                            _manager.createPawnData(
+                                _manager.GetPawnData(1), newCell.transform.position, new Vector2(i, j), false
                             )
                         );
                         break;
@@ -238,9 +238,9 @@ public class LevelTerrain : MonoBehaviour {
                     case 202:
                         newCell.SetState(CellState.free);
                         _lstCells.Add(newCell);
-                        GameManager.Instance.createPawn(
-                            GameManager.Instance.createPawnData(
-                                GameManager.Instance.GetPawnData(2), newCell.transform.position, new Vector2(i, j), false
+                        _manager.createPawn(
+                            _manager.createPawnData(
+                                _manager.GetPawnData(2), newCell.transform.position, new Vector2(i, j), false
                             )
                         );
                         break;
@@ -248,9 +248,9 @@ public class LevelTerrain : MonoBehaviour {
                     case 203:
                         newCell.SetState(CellState.free);
                         _lstCells.Add(newCell);
-                        GameManager.Instance.createPawn(
-                            GameManager.Instance.createPawnData(
-                                GameManager.Instance.GetPawnData(3), newCell.transform.position, new Vector2(i, j), false
+                        _manager.createPawn(
+                            _manager.createPawnData(
+                                _manager.GetPawnData(3), newCell.transform.position, new Vector2(i, j), false
                             )
                         );
                         break;
@@ -258,9 +258,9 @@ public class LevelTerrain : MonoBehaviour {
                     case 204:
                         newCell.SetState(CellState.free);
                         _lstCells.Add(newCell);
-                        GameManager.Instance.createPawn(
-                            GameManager.Instance.createPawnData(
-                                GameManager.Instance.GetPawnData(4), newCell.transform.position, new Vector2(i, j), false
+                        _manager.createPawn(
+                            _manager.createPawnData(
+                                _manager.GetPawnData(4), newCell.transform.position, new Vector2(i, j), false
                             )
                         );
                         break;
@@ -619,6 +619,8 @@ public class LevelTerrain : MonoBehaviour {
 
     void FixedUpdate()
     {
+        if (_manager.Locker || !_manager.IsPlayerTurn) return;
+
         // Si on touche l'écran ou si on clique
         if ((Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began) || Input.GetMouseButtonDown(0))
         {

@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 2e6539a489582c947a61616b17f5ac50
+timeCreated: 1511085923
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: First Order Light
+  fontNames:
+  - First Order Light
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
