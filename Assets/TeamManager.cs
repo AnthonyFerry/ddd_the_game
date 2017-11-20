@@ -18,7 +18,7 @@ public class TeamManager : SingletonPersistent<TeamManager> {
 
     void Start()
     {
-        SaveManager.Instance.Load();
+        SaveManager.Load();
 
         if (panel == null) return;
 
@@ -39,6 +39,8 @@ public class TeamManager : SingletonPersistent<TeamManager> {
         {
             playerTeam.Add(selector.type);
         }
+
+        SaveManager.SaveTeam();
     }
 
     public void DisplayCurrentTeam()

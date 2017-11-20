@@ -15,9 +15,15 @@ public class MenuManager : MonoBehaviour {
     // Unity lifecycle
     void Start()
     {
-        SaveManager.Instance.LoadProgression();
+        SaveManager.LoadProgression();
         _currentMenu = GetMenu("main");
         _currentMenu.Initialize();
+    }
+
+    void Update()
+    {
+        if (!AudioManager.IsPlaying("main"))
+            AudioManager.Play("Main Theme", false, "main");
     }
 
     // Functions

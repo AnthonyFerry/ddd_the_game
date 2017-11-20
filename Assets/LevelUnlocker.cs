@@ -36,7 +36,7 @@ public class LevelUnlocker : MonoBehaviour {
         messageColor = Color.green;
         StartCoroutine("DisplayMessage", msg);
 
-        SaveManager.Instance.SaveProgression();
+        SaveManager.SaveProgression();
 
         PlayerInput.text = "";
     }

@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccbb62544aa95454c9561dc425d51c54, type: 3}
+  m_Name: Assassin
+  m_EditorClassIdentifier: 
+  ScriptName: Assassin
+  Type: Assassin
+  IsCollider: 1
+  moveRange: 3
+  attackRange: 3
+  minDamages: 1450
+  maxDamages: 1550
+  attackType: 0
+  armor: 150
+  life: 750
+  weakness:
+  - Winged
+  - Wizard
+  strength:
+  - Archer
+  - Tank
+  Reference: {fileID: 1841682078193864, guid: 59eb731b3cf9e944fbd2c8a38908169a, type: 2}
+  Picture: {fileID: 21300000, guid: e3fa854fe361b6f4d9a1476b0052f813, type: 3}

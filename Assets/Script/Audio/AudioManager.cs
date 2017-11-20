@@ -83,6 +83,16 @@ public class AudioManager : SingletonPersistent<AudioManager>{
                 slot.Stop();
     }
 
+    bool InternalIsPlaying(string tag)
+    {
+        foreach (var slot in _slots)
+        {
+            if (slot.tag == tag)
+                return true;
+        }
+        return false;
+    }
+
     #endregion
 
     /// <summary>
@@ -103,6 +113,11 @@ public class AudioManager : SingletonPersistent<AudioManager>{
     static public void StopByTag(string tag)
     {
         Instance.InternalStopByTag(tag);
+    }
+
+    static public bool IsPlaying(string tag)
+    {
+        return Instance.InternalIsPlaying(tag);
     }
 
 

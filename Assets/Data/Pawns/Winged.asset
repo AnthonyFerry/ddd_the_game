@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccbb62544aa95454c9561dc425d51c54, type: 3}
+  m_Name: Winged
+  m_EditorClassIdentifier: 
+  ScriptName: Winged
+  Type: Winged
+  IsCollider: 1
+  moveRange: 4
+  attackRange: 1
+  minDamages: 700
+  maxDamages: 800
+  attackType: 0
+  armor: 1050
+  life: 1750
+  weakness:
+  - Archer
+  - Tank
+  strength:
+  - Assassin
+  - Wizard
+  Reference: {fileID: 1762344467989284, guid: bd144a17e63221e47886c7849fde52b1, type: 2}
+  Picture: {fileID: 21300000, guid: 747dca70080433b448ea6efb4d920a97, type: 3}

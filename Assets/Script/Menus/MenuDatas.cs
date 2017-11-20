@@ -65,7 +65,7 @@ public class MenuDatas : SingletonPersistent<MenuDatas> {
             if (level.isLocked)
             {
                 level.isLocked = false;
-                SaveManager.Instance.SaveProgression();
+                SaveManager.SaveProgression();
                 return;
             }
         }

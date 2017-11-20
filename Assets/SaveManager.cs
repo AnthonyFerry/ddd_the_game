@@ -11,29 +11,28 @@ public class SaveManagerEditor : Editor
 {
     override public void OnInspectorGUI()
     {
-        SaveManager script = (SaveManager)target;
 
         GUILayout.BeginHorizontal();
         GUILayout.BeginVertical();
         if (GUILayout.Button("Save Progression"))
         {
-            script.SaveProgression();
+            SaveManager.SaveProgression();
         }
 
         if (GUILayout.Button("Save Team"))
         {
-            script.SaveTeam();
+            SaveManager.SaveTeam();
         }
         GUILayout.EndVertical();
         GUILayout.BeginVertical();
         if (GUILayout.Button("Load Progression"))
         {
-            script.LoadProgression();
+            SaveManager.LoadProgression();
         }
 
         if (GUILayout.Button("Load Team"))
         {
-            script.Load();
+            SaveManager.Load();
         }
         GUILayout.EndVertical();
         GUILayout.EndHorizontal();
@@ -52,25 +51,15 @@ public class SaveManagerEditor : Editor
 /// <summary>
 /// Cette classe sert à sauvegarder la progression du joueur. Sont sauvegardés les MenuDatas ainsi que PlayerTeam.
 /// </summary>
-public class SaveManager : SingletonPersistent<SaveManager> {
+public class SaveManager : MonoBehaviour {
 
     const string FIRST_PAWN = "first";
     const string SECOND_PAWN = "second";
     const string THIRD_PAWN = "third";
     const string FOURTH_PAWN = "fourth";
     const string FIFTH_PAWN = "fifth";
-    
-    // Use this for initialization
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
-    public void SaveTeam()
+    static public void SaveTeam()
     {
         var tm = TeamManager.Instance;
 
@@ -83,7 +72,7 @@ public class SaveManager : SingletonPersistent<SaveManager> {
         PlayerPrefs.Save();
     }
 
-    public void SaveProgression()
+    static public void SaveProgression()
     {
         var worlds = MenuDatas.Instance.worlds;
 
@@ -107,7 +96,7 @@ public class SaveManager : SingletonPersistent<SaveManager> {
         PlayerPrefs.Save();
     }
 
-    public void LoadProgression()
+    static public void LoadProgression()
     {
         var worlds = MenuDatas.Instance.worlds;
 
@@ -126,7 +115,7 @@ public class SaveManager : SingletonPersistent<SaveManager> {
         }
     }
 
-    public void Load()
+    static public void Load()
     {
         var tm = TeamManager.Instance;
         Debug.Log(PlayerPrefs.GetInt(FIRST_PAWN) + "" + PlayerPrefs.GetInt(SECOND_PAWN) + "" + PlayerPrefs.GetInt(THIRD_PAWN) + "" + PlayerPrefs.GetInt(FOURTH_PAWN) + "" + PlayerPrefs.GetInt(FIFTH_PAWN));
