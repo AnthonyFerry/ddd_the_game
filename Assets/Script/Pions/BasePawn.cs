@@ -17,6 +17,7 @@ public class BasePawn : MonoBehaviour {
     [Header("Movement values")]
     public int moveRange = 0;
     public bool walkThroughWalls = false;
+    public bool hasAlreadyMoved = false; //to know if this pawn already moved this turn.
 
     [Header("Attack values")]
     public int attackRange = 0;

@@ -27,6 +27,7 @@ public class GameManager : SwissArmyKnife.Singleton<GameManager> {
     [SerializeField] int _nbPlayerPawn = 0;
     [SerializeField] int _nbEnemyPawn = 0;
     [SerializeField] bool _locker = false; // Ragnar Lock-Broke !
+    public BasePawn currentlyPlayedPawn = null;
 
     public List<BasePawn> Pawns {
         get { return _pawns; }
@@ -150,6 +151,8 @@ public class GameManager : SwissArmyKnife.Singleton<GameManager> {
     public void TurnTransition()
     {
         _locker = true;
+        if (currentlyPlayedPawn != null) currentlyPlayedPawn.hasAlreadyMoved = false;
+        currentlyPlayedPawn = null;
         Debug.Log("Locked !");
         _isPlayerTurn = !_isPlayerTurn;
         _interface.changingTurn(_isPlayerTurn);

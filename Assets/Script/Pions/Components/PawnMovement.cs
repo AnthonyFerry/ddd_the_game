@@ -56,8 +56,11 @@ public class PawnMovement : MonoBehaviour {
                 Debug.Log("Party's over, we reached destination");
                 //_gameBoard.GetCellByPosition(_gridDest).SetState(CellState.occupied);
                 _destination = Vector3.zero;
+                _parent.hasAlreadyMoved = true;
                 _hasADestination = false;
                 _gameBoard.refreshOccupationMap();
+                if (!_gameBoard.searchForTargets(_gameBoard.GetCellByPosition(_parent.PawnLocation), _parent.attackRange, _parent.attackType))
+                    GameManager.Instance.TurnTransition();
                 return false;
             }
 

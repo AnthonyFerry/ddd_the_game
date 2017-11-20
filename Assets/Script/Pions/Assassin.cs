@@ -24,10 +24,11 @@ public class Assassin : BasePawn {
     }
 
     int criticalHit() {
-        if(Mathf.FloorToInt(Random.Range(0.0f, 100.0f)) <= 5) {
+        /*if(Mathf.FloorToInt(Random.Range(0.0f, 100.0f)) <= 5) {
             return 2;
         } else {
             return 1;
-        }        
+        }*/
+        return Mathf.FloorToInt(Random.Range(0.0f, 100.0f)) <= 5 ? 2 : 1;
     }
 }
