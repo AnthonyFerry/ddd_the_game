@@ -70,7 +70,7 @@ public class UI_Management : SwissArmyKnife.Singleton<UI_Management> {
             nv._isPlayer = owner;
             nv._maxLife = nv._life = parent.health;
             nv._color = _playerColor;
-            nv.Init();
+            nv.Init(parent.type);
             _iconsPlayer.Add(nv);
         } else {
             no = Instantiate(_iconReference, _enemyPanel.transform);
@@ -81,7 +81,7 @@ public class UI_Management : SwissArmyKnife.Singleton<UI_Management> {
             nv._isPlayer = owner;
             nv._maxLife = nv._life = parent.health;
             nv._color = _enemyColor;
-            nv.Init();
+            nv.Init(parent.type);
             _iconsEnemy.Add(nv);
         }
 

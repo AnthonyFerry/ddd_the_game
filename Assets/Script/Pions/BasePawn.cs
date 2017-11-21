@@ -5,7 +5,7 @@ using UnityEngine;
 public class BasePawn : MonoBehaviour {
 
     [SerializeField]
-    protected PawnType Type;
+    protected PawnType _type;
     public bool isPlayer = true;
     public AtkSys attackType;
 
@@ -47,18 +47,19 @@ public class BasePawn : MonoBehaviour {
     /// <summary>
     /// To get the specific type of a BasePawn
     /// </summary>
-    public string PawnType { get { return Type.Type; } }
+    public string PawnType { get { return _type.Type; } }
+    public PawnType type { get { return _type; } }
 
     public virtual void Init(PawnData datum) {
-        Type = datum.type;
-        maxHealth = health = Type.life;
-        armor = Type.armor;
-        moveRange = Type.moveRange;
-        attackRange = Type.attackRange;
-        minDamages = Type.minDamages;
-        maxDamages = Type.maxDamages;
+        _type = datum.type;
+        maxHealth = health = _type.life;
+        armor = _type.armor;
+        moveRange = _type.moveRange;
+        attackRange = _type.attackRange;
+        minDamages = _type.minDamages;
+        maxDamages = _type.maxDamages;
         isPlayer = datum.isPlayer;
-        attackType = Type.attackType;
+        attackType = _type.attackType;
 
         _worldPosition = datum.location;
         _location = datum.boardPosition;
@@ -122,10 +123,10 @@ public class BasePawn : MonoBehaviour {
     public int dealDamages(string target)
     {
         float multi = 1.0f;
-        if (target == Type.strength[0] || target == Type.strength[1]) {
+        if (target == _type.strength[0] || target == _type.strength[1]) {
             multi = 1.25f;
             Debug.Log("target is weak !");
-        } else if (target == Type.weakness[0] || target == Type.weakness[1]) {
+        } else if (target == _type.weakness[0] || target == _type.weakness[1]) {
             multi = 0.75f;
             Debug.Log("target is too strong...");
         }

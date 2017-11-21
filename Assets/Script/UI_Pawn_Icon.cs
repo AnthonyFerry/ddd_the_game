@@ -13,13 +13,16 @@ public class UI_Pawn_Icon : MonoBehaviour {
     public float _maxLife;
 
     Image _image;
+    Image _icon;
     public bool _calculateDamages = false;
     
-    public void Init () {
+    public void Init (PawnType type) {
+        _icon = GetChildGameObject(GetChildGameObject(this.gameObject, "Background"), "Center").GetComponent<Image>();
         _image = GetChildGameObject(GetChildGameObject(this.gameObject, "Background"), "LoadingBar").GetComponent<Image>();
         if (_image != null) Debug.Log("Image for "+this.gameObject.name+" setted");
         _image.color = _color;
         _image.fillAmount = _life / _maxLife;
+        _icon.sprite = type.Picture; 
 	}
 
     // Use this for initialization
