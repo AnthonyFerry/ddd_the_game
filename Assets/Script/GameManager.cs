@@ -26,18 +26,18 @@ public class GameManager : SwissArmyKnife.Singleton<GameManager> {
     [SerializeField] bool _isPlayerTurn = true;
     [SerializeField] int _nbPlayerPawn = 0;
     [SerializeField] int _nbEnemyPawn = 0;
-    [SerializeField] bool _locker = false; // Ragnar Lock-Broke !
+    [SerializeField] GameState _locker = GameState.unlocked; // Ragnar Lock-Broke !
     public BasePawn currentlyPlayedPawn = null;
 
     public List<BasePawn> Pawns {
         get { return _pawns; }
     }
 
-    public bool Locker {
+    public GameState Locker {
         get { return _locker; }
         set { _locker = value; }
     }
-
+    
     public bool IsPlayerTurn {
         get { return _isPlayerTurn; }
     }
@@ -56,16 +56,23 @@ public class GameManager : SwissArmyKnife.Singleton<GameManager> {
 
     // Update is called once per frame
     void Update() {
+        if (_locker == GameState.endgame)
+            return;
+
         if (_nbPlayerPawn == 0 && _nbEnemyPawn != 0) {
             //defeat function
             Debug.Log("Defeat");
+            _locker = GameState.endgame;
+            _interface.callEndGame(false);
         } else if (_nbEnemyPawn == 0 && _nbPlayerPawn != 0) {
             //victory function
             Debug.Log("Victory");
+            _locker = GameState.endgame;
             MenuDatas.Instance.UnlockNextLevel();
+            _interface.callEndGame(true);
         }
 
-        if (!_locker) {
+        if (_locker == GameState.unlocked) {
             if (!_isPlayerTurn)
             {
                 //AI
@@ -147,10 +154,15 @@ public class GameManager : SwissArmyKnife.Singleton<GameManager> {
         return _pawnTypes[index] == null ? null : _pawnTypes[index];
     }
 
+    public int getRemainingOpponentsAmount(bool isPlayer)
+    {
+        return isPlayer ? _nbEnemyPawn : _nbPlayerPawn;
+    }
+
     //called in BasePawn.AtkFunction()
     public void TurnTransition()
     {
-        _locker = true;
+        _locker = GameState.locked;
         if (currentlyPlayedPawn != null) currentlyPlayedPawn.hasAlreadyMoved = false;
         currentlyPlayedPawn = null;
         Debug.Log("Locked !");
@@ -164,4 +176,11 @@ public struct PawnData {
     public PawnType type;
     public Vector2 boardPosition;
     public bool isPlayer;
+}
+
+public enum GameState
+{
+    unlocked,
+    locked,
+    endgame
 }

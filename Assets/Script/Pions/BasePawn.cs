@@ -97,8 +97,9 @@ public class BasePawn : MonoBehaviour {
     }
 
     public virtual bool atkFunction(BasePawn target) {
-        GameManager.Instance.TurnTransition();
-        return target.takeDamages(this.dealDamages(target.PawnType));
+        bool result = target.takeDamages(this.dealDamages(target.PawnType));
+        if(GameManager.Instance.getRemainingOpponentsAmount(this.isPlayer) > 0 && result) GameManager.Instance.TurnTransition();
+        return result;
     }
 
     /// <summary>

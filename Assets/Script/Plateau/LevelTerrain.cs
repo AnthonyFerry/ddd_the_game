@@ -782,7 +782,7 @@ public class LevelTerrain : MonoBehaviour {
 
     void FixedUpdate()
     {
-        if (_manager.Locker || !_manager.IsPlayerTurn) return;
+        if (_manager.Locker != GameState.unlocked || !_manager.IsPlayerTurn) return;
 
         // Si on touche l'écran ou si on clique
         if ((Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began) || Input.GetMouseButtonDown(0))
