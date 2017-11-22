@@ -10,8 +10,8 @@ public class BasePawn : MonoBehaviour {
     public AtkSys attackType;
 
     [Header("Life values")]
-    public int health = 0;
-    int maxHealth = 0;
+    public float health = 0;
+    public float maxHealth = 0;
     public int armor = 0;
 
     [Header("Movement values")]

@@ -50,6 +50,11 @@ public class UI_Pawn_Icon : MonoBehaviour {
 
     }
 
+    public void updateDamages(float actualLife)
+    {
+        updateDamages((int) actualLife);
+    }
+
     public void updateDamages(int actualLife) {
         _life = actualLife;
         _calculateDamages = true;

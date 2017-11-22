@@ -21,8 +21,9 @@ public class GameManager : SwissArmyKnife.Singleton<GameManager> {
     [Header("A list of the pawns currently played")]
     List<BasePawn> _pawns = null;
 
-    
+
     [Header("Useful variables for the party")]
+    [SerializeField] EnemyIntel _motherFucker;
     [SerializeField] bool _isPlayerTurn = true;
     [SerializeField] int _nbPlayerPawn = 0;
     [SerializeField] int _nbEnemyPawn = 0;
@@ -44,6 +45,8 @@ public class GameManager : SwissArmyKnife.Singleton<GameManager> {
 
 	// Use this for initialization
 	void Start () {
+        _motherFucker = EnemyIntel.Instance;
+        _motherFucker.Init(_terrain);
         _isPlayerTurn = true;
         _terrain._manager = this;
         //createPawn(createPawnData(_pawnTypes[0], new Vector3(0, 0, 0), new Vector2(0, 0), true));

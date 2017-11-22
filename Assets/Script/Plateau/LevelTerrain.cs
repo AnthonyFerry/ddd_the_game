@@ -88,6 +88,10 @@ public class LevelTerrain : MonoBehaviour {
     /// </summary>
     [SerializeField]
     List<Cell> _neighbourgs = new List<Cell>();
+    public List<Cell> Neighborhood{
+        get { return _neighbourgs; }
+        set { _neighbourgs = value; }
+    }
 
     int _terrainNumber;
     int[,] _terrain;
@@ -429,6 +433,125 @@ public class LevelTerrain : MonoBehaviour {
                 //_neighbourgs.Add(neighbourg);
 
                 HighlightNeighbourgs(neighbourg, index - 1, isWinged);
+            }
+            neighbourg = null;
+        }
+    }
+
+    public void searchForNeighbourgs(Cell selectedCase, int index, bool isWinged)
+    {
+
+        if (index == 0) return;
+
+        // Sommes nous sur une ligne paire ou impaire ?
+        int lineSpec = selectedCase.y % 2 == 0 ? -1 : 1;
+
+        Cell neighbourg;
+
+        //  ___ ___ ___
+        // |___|___|___|
+        // |_X_|_P_|___|
+        // |___|___|___|
+        // 
+        // P = Player, X = case à checker
+        if (neighbourg = GetCellByPosition(selectedCase.x - 1, selectedCase.y))
+        {
+            if (neighbourg.isAccessible || (isWinged && neighbourg.isFlyable))
+            {
+                if (selectedCase.GetState() == CellState.free)
+                    _neighbourgs.Add(selectedCase);
+
+                searchForNeighbourgs(neighbourg, index - 1, isWinged);
+            }
+            neighbourg = null;
+        }
+
+        //  ___ ___ ___
+        // |___|___|___|
+        // |___|_P_|_X_|
+        // |___|___|___|
+        // 
+        // P = Player, X = case à checker
+        if (neighbourg = GetCellByPosition(selectedCase.x + 1, selectedCase.y))
+        {
+            if (neighbourg.isAccessible || (isWinged && neighbourg.isFlyable))
+            {
+                if (selectedCase.GetState() == CellState.free)
+                    _neighbourgs.Add(selectedCase);
+
+                searchForNeighbourgs(neighbourg, index - 1, isWinged);
+            }
+            neighbourg = null;
+        }
+
+        //  ___ ___ ___
+        // |___|_X_|___|
+        // |___|_P_|___|
+        // |___|___|___|
+        // 
+        // P = Player, X = case à checker
+        if (neighbourg = GetCellByPosition(selectedCase.x, selectedCase.y + 1))
+        {
+            if (neighbourg.isAccessible || (isWinged && neighbourg.isFlyable))
+            {
+                if (selectedCase.GetState() == CellState.free)
+                    _neighbourgs.Add(selectedCase);
+
+                searchForNeighbourgs(neighbourg, index - 1, isWinged);
+            }
+            neighbourg = null;
+        }
+
+        //  ___ ___ ___
+        // |___|___|___|
+        // |___|_P_|___|
+        // |___|_X_|___|
+        // 
+        // P = Player, X = case à checker
+        if (neighbourg = GetCellByPosition(selectedCase.x, selectedCase.y - 1))
+        {
+            if (neighbourg.isAccessible || (isWinged && neighbourg.isFlyable))
+            {
+                if (selectedCase.GetState() == CellState.free)
+                    _neighbourgs.Add(selectedCase);
+
+                searchForNeighbourgs(neighbourg, index - 1, isWinged);
+            }
+            neighbourg = null;
+        }
+
+        //  ___ ___ ___
+        // |_X_|___|_X_|
+        // |___|_P_|___|
+        // |___|___|___|  En fonction de lineSpec
+        // 
+        // P = Player, X = case à checker
+        if (neighbourg = GetCellByPosition(selectedCase.x + lineSpec, selectedCase.y + 1))
+        {
+            if (neighbourg.isAccessible || (isWinged && neighbourg.isFlyable))
+            {
+                if (selectedCase.GetState() == CellState.free)
+                    _neighbourgs.Add(selectedCase);
+
+                searchForNeighbourgs(neighbourg, index - 1, isWinged);
+            }
+            neighbourg = null;
+        }
+
+        //  ___ ___ ___
+        // |___|___|___|
+        // |___|_P_|___|
+        // |_X_|___|_X_|  En fonction de lineSpec
+        // 
+        // P = Player, X = case à checker
+        if (neighbourg = GetCellByPosition(selectedCase.x + lineSpec, selectedCase.y - 1))
+        {
+            if (neighbourg.isAccessible || (isWinged && neighbourg.isFlyable))
+            {
+                if (selectedCase.GetState() == CellState.free)
+                    _neighbourgs.Add(selectedCase);
+
+                searchForNeighbourgs(neighbourg, index - 1, isWinged);
             }
             neighbourg = null;
         }

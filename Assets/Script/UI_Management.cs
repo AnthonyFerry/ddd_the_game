@@ -106,11 +106,13 @@ public class UI_Management : SwissArmyKnife.Singleton<UI_Management> {
             _endText.text = "Victoire !";
             _endButtons[0].transform.localPosition = new Vector3(-300, -120);
             _endButtons[1].transform.localPosition = new Vector3(0, -120);
+            _endButtons[2].SetActive(true);
             _endAnim.SetTrigger("TriggerVictory");
         } else {
             _endText.text = "Défaite...";
             _endButtons[0].transform.localPosition = new Vector3(-150, -120);
             _endButtons[1].transform.localPosition = new Vector3(150, -120);
+            _endButtons[2].SetActive(false);
             _endAnim.SetTrigger("TriggerDefeat");
         }
     }
