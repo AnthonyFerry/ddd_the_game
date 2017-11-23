@@ -22,13 +22,9 @@ public class TeamManager : SingletonPersistent<TeamManager> {
 
         if (panel == null) return;
 
-        _pawnSelectors = panel.GetComponentsInChildren<PawnSelector>();
-        DisplayCurrentTeam();
-    }
+        GetPawnSelectors();
 
-    void OnEnable()
-    {
-        //DisplayCurrentTeam();
+        DisplayCurrentTeam();
     }
 
     public void ValidateTeam()
@@ -45,6 +41,8 @@ public class TeamManager : SingletonPersistent<TeamManager> {
 
     public void DisplayCurrentTeam()
     {
+        GetPawnSelectors();
+
         for(int i = 0; i < 5; i++)
         {
             Debug.Log(i);
@@ -54,5 +52,11 @@ public class TeamManager : SingletonPersistent<TeamManager> {
 
     public void Close(bool saveTeam = false)
     {
+    }
+
+    void GetPawnSelectors()
+    {
+        if (_pawnSelectors[0] == null)
+            _pawnSelectors = panel.GetComponentsInChildren<PawnSelector>();
     }
 }

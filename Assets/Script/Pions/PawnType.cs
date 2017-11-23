@@ -37,6 +37,9 @@ public class PawnType : ScriptableObject
     [Header("On the UI")]
     public Sprite Picture;
 
+    [Header("Attack FX")]
+    public GameObject Effect;
+
 }
 
 public enum AtkSys {

@@ -10,7 +10,7 @@ public class SoundSlot : MonoBehaviour {
     public bool isPlaying { get { return (state != SoundState.empty); } }
     public bool isPaused { get { return state == SoundState.paused; } }
     public bool isEmpty { get { return state == SoundState.empty; } }
-    public string tag = "";
+    public new string tag = "";
 
     public SoundState state = SoundState.empty;
     AudioSource _audioSource;

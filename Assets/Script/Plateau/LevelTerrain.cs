@@ -3,46 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using CommonTools;
 
-#if UNITY_EDITOR
-using UnityEditor;
-
-[CustomEditor(typeof(LevelTerrain))]
-public class LevelTerrainEditor : Editor
-{
-    public override void OnInspectorGUI()
-    {
-        LevelTerrain _lt = (LevelTerrain)target;
-
-        int levelCount = System.IO.Directory.GetFiles(Application.streamingAssetsPath + "/", "*.csv", System.IO.SearchOption.AllDirectories).Length;
-
-        EditorGUILayout.BeginHorizontal();
-        for (int i = 1; i <= levelCount; i++)
-        {
-            string levelName = "lvl " + i;
-            if (GUILayout.Button(levelName))
-            {
-                _lt.BuildTerrain(i);
-                Debug.Log(i);
-            }
-        }
-        EditorGUILayout.EndHorizontal();
-
-        if (GUILayout.Button("Clear level"))
-        {
-            _lt.ClearTerrain();
-        }
-
-
-        DrawDefaultInspector();
-    }
-}
-#endif
-
 public class LevelTerrain : MonoBehaviour {
 
     // Prefab de case de plateau.
     [Header("Board Case Prefab")]
     public GameObject Cell;
+
+    public GameObject AttackableEnnemy;
+
+    public GameObject DamageEffect;
 
     // Valeur de débug pour la récursivité de recherche des cases atteignables.
     [Header("How Many Neighbourgs to check ?")]
@@ -581,6 +550,8 @@ public class LevelTerrain : MonoBehaviour {
                 if (target != null && !target.isPlayer)
                 {
                     neighbourg.SetState(CellState.attackable);
+                    GameObject go = Instantiate(AttackableEnnemy);
+                    go.transform.position = neighbourg.transform.position;
                 }
 
                 
@@ -605,6 +576,9 @@ public class LevelTerrain : MonoBehaviour {
                 if (target != null && !target.isPlayer)
                 {
                     neighbourg.SetState(CellState.attackable);
+
+                    GameObject go = Instantiate(AttackableEnnemy);
+                    go.transform.position = neighbourg.transform.position;
                 }
 
                 
@@ -629,6 +603,9 @@ public class LevelTerrain : MonoBehaviour {
                 if (target != null && !target.isPlayer)
                 {
                     neighbourg.SetState(CellState.attackable);
+
+                    GameObject go = Instantiate(AttackableEnnemy);
+                    go.transform.position = neighbourg.transform.position;
                 }
 
                 
@@ -653,6 +630,9 @@ public class LevelTerrain : MonoBehaviour {
                 if (target != null && !target.isPlayer)
                 {
                     neighbourg.SetState(CellState.attackable);
+
+                    GameObject go = Instantiate(AttackableEnnemy);
+                    go.transform.position = neighbourg.transform.position;
                 }
 
                 
@@ -677,6 +657,9 @@ public class LevelTerrain : MonoBehaviour {
                 if (target != null && !target.isPlayer)
                 {
                     neighbourg.SetState(CellState.attackable);
+
+                    GameObject go = Instantiate(AttackableEnnemy);
+                    go.transform.position = neighbourg.transform.position;
                 }
 
                 
@@ -701,6 +684,9 @@ public class LevelTerrain : MonoBehaviour {
                 if (target != null && !target.isPlayer)
                 {
                     neighbourg.SetState(CellState.attackable);
+
+                    GameObject go = Instantiate(AttackableEnnemy);
+                    go.transform.position = neighbourg.transform.position;
                 }
 
                 
@@ -948,8 +934,15 @@ public class LevelTerrain : MonoBehaviour {
                     } else {
                         if(selectedCell.GetState() == CellState.attackable)
                             //if (!selectedPawn.takeDamages(_currentSelectedPawn.dealDamages(selectedPawn.PawnType)))
-                            if (!_currentSelectedPawn.atkFunction(selectedPawn))
+                            if (_currentSelectedPawn.atkFunction(selectedPawn))
+                            {
+                                GameObject go = Instantiate(DamageEffect);
+                                go.transform.position = selectedPawn.transform.position;
+                            }
+                            else
+                            {
                                 _manager.destroyPawn(selectedPawn);
+                            }
                         _currentSelected = null;
                         _currentSelectedPawn = null;
                         ClearNeighbourgs();

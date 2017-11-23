@@ -5,7 +5,7 @@ public class CandleLight : MonoBehaviour
 {
     public float minIntensity = 0.25f;
     public float maxIntensity = 0.5f;
-    Light light;
+    new Light light;
     float random;
 
     void Start()

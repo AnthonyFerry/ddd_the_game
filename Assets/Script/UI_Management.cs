@@ -125,6 +125,7 @@ public class UI_Management : SwissArmyKnife.Singleton<UI_Management> {
     public void OC_BackMenu()
     {
         SceneManager.LoadScene(0);
+        TeamManager.Instance.DisplayCurrentTeam();
     }
 
     public void OC_Continue()

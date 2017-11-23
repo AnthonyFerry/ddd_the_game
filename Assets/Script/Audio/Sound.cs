@@ -42,7 +42,7 @@ public class SoundEditor : Editor
 public class Sound : ScriptableObject {
 
     [Header("Name of the asset")]
-    public string name;
+    public new string name;
 
     [Header("The default sound to play")]
     public AudioClip defaultClip;

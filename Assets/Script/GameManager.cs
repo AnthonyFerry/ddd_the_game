@@ -45,8 +45,8 @@ public class GameManager : SwissArmyKnife.Singleton<GameManager> {
 
 	// Use this for initialization
 	void Start () {
-        _motherFucker = EnemyIntel.Instance;
-        _motherFucker.Init(_terrain);
+//        _motherFucker = EnemyIntel.Instance;
+//        _motherFucker.Init(_terrain);
         _isPlayerTurn = true;
         _terrain._manager = this;
         //createPawn(createPawnData(_pawnTypes[0], new Vector3(0, 0, 0), new Vector2(0, 0), true));
