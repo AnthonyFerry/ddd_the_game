@@ -29,3 +29,5 @@ MonoBehaviour:
   - Assassin
   Reference: {fileID: 1779280721994916, guid: bf6e315e3731d8e46b9210c9a1f0f00d, type: 2}
   Picture: {fileID: 21300000, guid: caa0fd2b22de0374e912c714be1cbfe3, type: 3}
+  Effect: {fileID: 100006, guid: 9f18ee4ac76f92f469346d34cc24cb9c, type: 2}
+  SoundName: Explosion

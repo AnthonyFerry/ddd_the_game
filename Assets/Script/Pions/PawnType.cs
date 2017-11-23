@@ -40,6 +40,9 @@ public class PawnType : ScriptableObject
     [Header("Attack FX")]
     public GameObject Effect;
 
+    [Header("Sound FX")]
+    public string SoundName;
+
 }
 
 public enum AtkSys {

@@ -392,6 +392,11 @@ Prefab:
       value: 
       objectReference: {fileID: 1916573989397084, guid: 9df8d807bb5c6204188aba983be9692a,
         type: 2}
+    - target: {fileID: 114962645225468530, guid: e83b2f8ce17dae5458994843863960bb,
+        type: 2}
+      propertyPath: DamageEffect
+      value: 
+      objectReference: {fileID: 100000, guid: eb5c60523d0efcb43b82bfbd0ad58bf8, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e83b2f8ce17dae5458994843863960bb, type: 2}
   m_IsPrefabParent: 0

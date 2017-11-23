@@ -29,3 +29,5 @@ MonoBehaviour:
   - Wizard
   Reference: {fileID: 1762344467989284, guid: bd144a17e63221e47886c7849fde52b1, type: 2}
   Picture: {fileID: 21300000, guid: 747dca70080433b448ea6efb4d920a97, type: 3}
+  Effect: {fileID: 100000, guid: 24a4e4c3dd5629940ac2dd23e6c35731, type: 2}
+  SoundName: Sword

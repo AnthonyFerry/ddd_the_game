@@ -90,6 +90,7 @@ public class BasePawn : MonoBehaviour {
         {
             Debug.Log(destination.gameObject.name);
             _movements.NewDestination(destination);
+            AudioManager.Play("Movement", true);
         }
         else
         {
@@ -98,6 +99,7 @@ public class BasePawn : MonoBehaviour {
     }
 
     public virtual bool atkFunction(BasePawn target) {
+        AudioManager.Play(type.SoundName);
         bool result = target.takeDamages(this.dealDamages(target.PawnType));
         if(GameManager.Instance.getRemainingOpponentsAmount(this.isPlayer) > 0 && result) GameManager.Instance.TurnTransition();
         return result;

@@ -936,11 +936,13 @@ public class LevelTerrain : MonoBehaviour {
                             //if (!selectedPawn.takeDamages(_currentSelectedPawn.dealDamages(selectedPawn.PawnType)))
                             if (_currentSelectedPawn.atkFunction(selectedPawn))
                             {
-                                GameObject go = Instantiate(DamageEffect);
+                                GameObject go = Instantiate(_currentSelectedPawn.type.Effect);
                                 go.transform.position = selectedPawn.transform.position;
                             }
                             else
                             {
+                                GameObject go = Instantiate(DamageEffect);
+                                go.transform.position = selectedCell.transform.position;
                                 _manager.destroyPawn(selectedPawn);
                             }
                         _currentSelected = null;

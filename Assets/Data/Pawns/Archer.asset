@@ -29,3 +29,5 @@ MonoBehaviour:
   - Tank
   Reference: {fileID: 1873643045964648, guid: 8b853ddc71fc1f848985e83b0dcde8af, type: 2}
   Picture: {fileID: 21300000, guid: 00f1838bff3183a4baeb7340241f1ae4, type: 3}
+  Effect: {fileID: 100004, guid: 3f2385808f756ca46b7964701d7d99fe, type: 2}
+  SoundName: Sword
