@@ -20,7 +20,7 @@ MonoBehaviour:
   maxDamages: 1100
   attackType: 1
   armor: 100
-  life: 900
+  life: 1200
   weakness:
   - Tank
   - Winged

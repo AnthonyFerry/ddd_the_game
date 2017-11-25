@@ -15,9 +15,9 @@ MonoBehaviour:
   Type: Archer
   IsCollider: 1
   moveRange: 3
-  attackRange: 6
-  minDamages: 1100
-  maxDamages: 1250
+  attackRange: 4
+  minDamages: 800
+  maxDamages: 1000
   attackType: 1
   armor: 450
   life: 1350

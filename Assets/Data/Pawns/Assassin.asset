@@ -15,12 +15,12 @@ MonoBehaviour:
   Type: Assassin
   IsCollider: 1
   moveRange: 3
-  attackRange: 3
+  attackRange: 2
   minDamages: 1450
   maxDamages: 1550
   attackType: 0
   armor: 150
-  life: 750
+  life: 1000
   weakness:
   - Winged
   - Wizard

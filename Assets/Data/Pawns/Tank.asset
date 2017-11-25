@@ -20,7 +20,7 @@ MonoBehaviour:
   maxDamages: 950
   attackType: 0
   armor: 1250
-  life: 2000
+  life: 2500
   weakness:
   - Archer
   - Assassin
