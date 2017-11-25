@@ -59,8 +59,21 @@ public class PawnMovement : MonoBehaviour {
                 _parent.hasAlreadyMoved = true;
                 _hasADestination = false;
                 _gameBoard.refreshOccupationMap();
-                if (!_gameBoard.searchForTargets(_gameBoard.GetCellByPosition(_parent.PawnLocation), _parent.attackRange, _parent.attackType))
+                if (!_gameBoard.searchForTargets(_gameBoard.GetCellByPosition(_parent.PawnLocation), _parent.attackRange, _parent.attackType, _parent.isPlayer))
+                {
                     GameManager.Instance.TurnTransition();
+                }
+                else
+                {
+                    Debug.Log("Blablabla !");
+                    _gameBoard.refreshOccupationMap();
+                    _gameBoard.HighlightTargetables(_gameBoard.GetCellByPosition(_parent.PawnLocation), _parent.attackRange, _parent.attackType, _parent.isPlayer);
+                    if (_parent.isPlayer) {
+                        _gameBoard._currentSelectedPawn = _parent;
+                    } else {
+                        EnemyIntel.Instance.openTimer(ActualStep.afterMoving);
+                    }
+                }
                 return false;
             }
 

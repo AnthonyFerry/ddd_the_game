@@ -98,10 +98,27 @@ public class BasePawn : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// If return true, the attacked pawn is still alive.
+    /// </summary>
     public virtual bool atkFunction(BasePawn target) {
         AudioManager.Play(type.SoundName);
         bool result = target.takeDamages(this.dealDamages(target.PawnType));
-        if(GameManager.Instance.getRemainingOpponentsAmount(this.isPlayer) > 0 && result) GameManager.Instance.TurnTransition();
+        if (GameManager.Instance.getRemainingOpponentsAmount(this.isPlayer) > 0/* && result*/)
+        {
+            if (result || GameManager.Instance.getRemainingOpponentsAmount(this.isPlayer) > 1)
+            {
+                GameManager.Instance.TurnTransition();
+            }
+            else
+            {
+                Debug.Log("On ne passe pas ! <2>");
+            }
+        }
+        else
+        {
+            Debug.Log("On ne passe pas ! <1>");
+        }
         return result;
     }
 

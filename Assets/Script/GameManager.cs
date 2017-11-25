@@ -45,8 +45,8 @@ public class GameManager : SwissArmyKnife.Singleton<GameManager> {
 
 	// Use this for initialization
 	void Start () {
-//        _motherFucker = EnemyIntel.Instance;
-//        _motherFucker.Init(_terrain);
+        _motherFucker = EnemyIntel.Instance;
+        _motherFucker.Init(_terrain);
         _isPlayerTurn = true;
         _terrain._manager = this;
         //createPawn(createPawnData(_pawnTypes[0], new Vector3(0, 0, 0), new Vector2(0, 0), true));
@@ -76,10 +76,13 @@ public class GameManager : SwissArmyKnife.Singleton<GameManager> {
         }
 
         if (_locker == GameState.unlocked) {
-            if (!_isPlayerTurn)
+            if (!_isPlayerTurn && _motherFucker._isThinking == false)
             {
                 //AI
-                TurnTransition();
+                //TurnTransition();
+                _motherFucker.BeginTurn();
+            }else if(_isPlayerTurn && _motherFucker._isThinking == true) {
+                _motherFucker._isThinking = false;
             }
         }
 		
@@ -162,12 +165,22 @@ public class GameManager : SwissArmyKnife.Singleton<GameManager> {
         return isPlayer ? _nbEnemyPawn : _nbPlayerPawn;
     }
 
+    public float distanceBetweenPawns(BasePawn p1, BasePawn p2)
+    {
+        return Vector3.Distance(p1.WorldPosition, p2.WorldPosition);
+        //return -1;
+    }
+
     //called in BasePawn.AtkFunction()
     public void TurnTransition()
     {
         _locker = GameState.locked;
         if (currentlyPlayedPawn != null) currentlyPlayedPawn.hasAlreadyMoved = false;
         currentlyPlayedPawn = null;
+        _terrain._currentSelectedPawn = null;
+        _terrain._currentSelected = null;
+        _terrain.ClearNeighbourgs();
+        _terrain.refreshOccupationMap();
         Debug.Log("Locked !");
         _isPlayerTurn = !_isPlayerTurn;
         _interface.changingTurn(_isPlayerTurn);

@@ -43,9 +43,9 @@ public class LevelTerrain : MonoBehaviour {
 
     [Header("Currently selected cell and pawn")]
     [SerializeField]
-    Cell _currentSelected;
+    public Cell _currentSelected;
     [SerializeField]
-    BasePawn _currentSelectedPawn;
+    public BasePawn _currentSelectedPawn;
 
     /// <summary>
     /// Liste de toutes les cases du plateau.
@@ -60,6 +60,12 @@ public class LevelTerrain : MonoBehaviour {
     public List<Cell> Neighborhood{
         get { return _neighbourgs; }
         set { _neighbourgs = value; }
+    }
+    List<Cell> _targetables = new List<Cell>();
+    public List<Cell> Targetables
+    {
+        get { return _targetables; }
+        set { _targetables = value; }
     }
 
     int _terrainNumber;
@@ -266,7 +272,7 @@ public class LevelTerrain : MonoBehaviour {
         return null;
     }
 
-    void ClearNeighbourgs()
+    public void ClearNeighbourgs()
     {
         foreach (Cell n in _neighbourgs)
         {
@@ -276,7 +282,17 @@ public class LevelTerrain : MonoBehaviour {
         _neighbourgs.Clear();
     }
 
-    void HighlightNeighbourgs(Cell selectedCase, int index, bool isWinged)
+    public void ClearTargetables()
+    {
+        foreach (Cell t in _targetables)
+        {
+            t.SetState(CellState.free);
+        }
+
+        _targetables.Clear();
+    }
+
+    public void HighlightNeighbourgs(Cell selectedCase, int index, bool isWinged)
     {
         if (selectedCase.GetState() == CellState.free) {
             selectedCase.SetState(CellState.neighbourg);
@@ -526,7 +542,7 @@ public class LevelTerrain : MonoBehaviour {
         }
     }
 
-    void HighlightTargetables(Cell selectedCase, int index, AtkSys atk)
+    public void HighlightTargetables(Cell selectedCase, int index, AtkSys atk, bool playerOrNot)
     {
         
         if (index == 0) return;
@@ -547,9 +563,10 @@ public class LevelTerrain : MonoBehaviour {
             if (neighbourg.GetState() == CellState.occupied)
             {
                 BasePawn target = _manager.getPawnByLocation(neighbourg.BoardPosition);
-                if (target != null && !target.isPlayer)
+                if (target != null && target.isPlayer != playerOrNot)
                 {
                     neighbourg.SetState(CellState.attackable);
+                    _targetables.Add(neighbourg);
                     GameObject go = Instantiate(AttackableEnnemy);
                     go.transform.position = neighbourg.transform.position;
                 }
@@ -558,7 +575,7 @@ public class LevelTerrain : MonoBehaviour {
             }
 
             if(neighbourg.isAccessible || atk == AtkSys.Ranged)
-                HighlightTargetables(neighbourg, index - 1, atk);
+                HighlightTargetables(neighbourg, index - 1, atk, playerOrNot);
             neighbourg = null;
         }
 
@@ -573,10 +590,10 @@ public class LevelTerrain : MonoBehaviour {
             if (neighbourg.GetState() == CellState.occupied)
             {
                 BasePawn target = _manager.getPawnByLocation(neighbourg.BoardPosition);
-                if (target != null && !target.isPlayer)
+                if (target != null && target.isPlayer != playerOrNot)
                 {
                     neighbourg.SetState(CellState.attackable);
-
+                    _targetables.Add(neighbourg);
                     GameObject go = Instantiate(AttackableEnnemy);
                     go.transform.position = neighbourg.transform.position;
                 }
@@ -585,7 +602,7 @@ public class LevelTerrain : MonoBehaviour {
             }
 
             if (neighbourg.isAccessible || atk == AtkSys.Ranged)
-                HighlightTargetables(neighbourg, index - 1, atk);
+                HighlightTargetables(neighbourg, index - 1, atk, playerOrNot);
             neighbourg = null;
         }
 
@@ -600,10 +617,10 @@ public class LevelTerrain : MonoBehaviour {
             if (neighbourg.GetState() == CellState.occupied)
             {
                 BasePawn target = _manager.getPawnByLocation(neighbourg.BoardPosition);
-                if (target != null && !target.isPlayer)
+                if (target != null && target.isPlayer != playerOrNot)
                 {
                     neighbourg.SetState(CellState.attackable);
-
+                    _targetables.Add(neighbourg);
                     GameObject go = Instantiate(AttackableEnnemy);
                     go.transform.position = neighbourg.transform.position;
                 }
@@ -612,7 +629,7 @@ public class LevelTerrain : MonoBehaviour {
             }
 
             if (neighbourg.isAccessible || atk == AtkSys.Ranged)
-                HighlightTargetables(neighbourg, index - 1, atk);
+                HighlightTargetables(neighbourg, index - 1, atk, playerOrNot);
             neighbourg = null;
         }
 
@@ -627,10 +644,10 @@ public class LevelTerrain : MonoBehaviour {
             if (neighbourg.GetState() == CellState.occupied)
             {
                 BasePawn target = _manager.getPawnByLocation(neighbourg.BoardPosition);
-                if (target != null && !target.isPlayer)
+                if (target != null && target.isPlayer != playerOrNot)
                 {
                     neighbourg.SetState(CellState.attackable);
-
+                    _targetables.Add(neighbourg);
                     GameObject go = Instantiate(AttackableEnnemy);
                     go.transform.position = neighbourg.transform.position;
                 }
@@ -639,7 +656,7 @@ public class LevelTerrain : MonoBehaviour {
             }
 
             if (neighbourg.isAccessible || atk == AtkSys.Ranged)
-                HighlightTargetables(neighbourg, index - 1, atk);
+                HighlightTargetables(neighbourg, index - 1, atk, playerOrNot);
             neighbourg = null;
         }
 
@@ -654,10 +671,10 @@ public class LevelTerrain : MonoBehaviour {
             if (neighbourg.GetState() == CellState.occupied)
             {
                 BasePawn target = _manager.getPawnByLocation(neighbourg.BoardPosition);
-                if (target != null && !target.isPlayer)
+                if (target != null && target.isPlayer != playerOrNot)
                 {
                     neighbourg.SetState(CellState.attackable);
-
+                    _targetables.Add(neighbourg);
                     GameObject go = Instantiate(AttackableEnnemy);
                     go.transform.position = neighbourg.transform.position;
                 }
@@ -666,7 +683,7 @@ public class LevelTerrain : MonoBehaviour {
             }
 
             if (neighbourg.isAccessible || atk == AtkSys.Ranged)
-                HighlightTargetables(neighbourg, index - 1, atk);
+                HighlightTargetables(neighbourg, index - 1, atk, playerOrNot);
             neighbourg = null;
         }
 
@@ -681,10 +698,10 @@ public class LevelTerrain : MonoBehaviour {
             if (neighbourg.GetState() == CellState.occupied)
             {
                 BasePawn target = _manager.getPawnByLocation(neighbourg.BoardPosition);
-                if (target != null && !target.isPlayer)
+                if (target != null && target.isPlayer != playerOrNot)
                 {
                     neighbourg.SetState(CellState.attackable);
-
+                    _targetables.Add(neighbourg);
                     GameObject go = Instantiate(AttackableEnnemy);
                     go.transform.position = neighbourg.transform.position;
                 }
@@ -693,12 +710,12 @@ public class LevelTerrain : MonoBehaviour {
             }
 
             if (neighbourg.isAccessible || atk == AtkSys.Ranged)
-                HighlightTargetables(neighbourg, index - 1, atk);
+                HighlightTargetables(neighbourg, index - 1, atk, playerOrNot);
             neighbourg = null;
         }
     }
 
-    public bool searchForTargets(Cell selectedCase, int index, AtkSys atk)
+    public bool searchForTargets(Cell selectedCase, int index, AtkSys atk, bool playerOrNot)
     {
 
         if (index == 0) return false; //If we reach this point, we didn't find any good target.
@@ -719,7 +736,7 @@ public class LevelTerrain : MonoBehaviour {
             if (neighbourg.GetState() == CellState.occupied)
             {
                 BasePawn target = _manager.getPawnByLocation(neighbourg.BoardPosition);
-                if (target != null && !target.isPlayer)
+                if (target != null && target.isPlayer != playerOrNot)
                 {
                     //neighbourg.SetState(CellState.attackable);
                     return true;
@@ -729,7 +746,7 @@ public class LevelTerrain : MonoBehaviour {
             }
 
             if (neighbourg.isAccessible || atk == AtkSys.Ranged)
-                if(searchForTargets(neighbourg, index - 1, atk)) return true;
+                if(searchForTargets(neighbourg, index - 1, atk, playerOrNot)) return true;
             neighbourg = null;
         }
 
@@ -744,7 +761,7 @@ public class LevelTerrain : MonoBehaviour {
             if (neighbourg.GetState() == CellState.occupied)
             {
                 BasePawn target = _manager.getPawnByLocation(neighbourg.BoardPosition);
-                if (target != null && !target.isPlayer)
+                if (target != null && target.isPlayer != playerOrNot)
                 {
                     //neighbourg.SetState(CellState.attackable);
                     return true;
@@ -754,7 +771,7 @@ public class LevelTerrain : MonoBehaviour {
             }
 
             if (neighbourg.isAccessible || atk == AtkSys.Ranged)
-                if (searchForTargets(neighbourg, index - 1, atk)) return true;
+                if (searchForTargets(neighbourg, index - 1, atk, playerOrNot)) return true;
             neighbourg = null;
         }
 
@@ -769,7 +786,7 @@ public class LevelTerrain : MonoBehaviour {
             if (neighbourg.GetState() == CellState.occupied)
             {
                 BasePawn target = _manager.getPawnByLocation(neighbourg.BoardPosition);
-                if (target != null && !target.isPlayer)
+                if (target != null && target.isPlayer != playerOrNot)
                 {
                     //neighbourg.SetState(CellState.attackable);
                     return true;
@@ -779,7 +796,7 @@ public class LevelTerrain : MonoBehaviour {
             }
 
             if (neighbourg.isAccessible || atk == AtkSys.Ranged)
-                if (searchForTargets(neighbourg, index - 1, atk)) return true;
+                if (searchForTargets(neighbourg, index - 1, atk, playerOrNot)) return true;
             neighbourg = null;
         }
 
@@ -794,7 +811,7 @@ public class LevelTerrain : MonoBehaviour {
             if (neighbourg.GetState() == CellState.occupied)
             {
                 BasePawn target = _manager.getPawnByLocation(neighbourg.BoardPosition);
-                if (target != null && !target.isPlayer)
+                if (target != null && target.isPlayer != playerOrNot)
                 {
                     //neighbourg.SetState(CellState.attackable);
                     return true;
@@ -804,7 +821,7 @@ public class LevelTerrain : MonoBehaviour {
             }
 
             if (neighbourg.isAccessible || atk == AtkSys.Ranged)
-                if (searchForTargets(neighbourg, index - 1, atk)) return true;
+                if (searchForTargets(neighbourg, index - 1, atk, playerOrNot)) return true;
             neighbourg = null;
         }
 
@@ -819,7 +836,7 @@ public class LevelTerrain : MonoBehaviour {
             if (neighbourg.GetState() == CellState.occupied)
             {
                 BasePawn target = _manager.getPawnByLocation(neighbourg.BoardPosition);
-                if (target != null && !target.isPlayer)
+                if (target != null && target.isPlayer != playerOrNot)
                 {
                     //neighbourg.SetState(CellState.attackable);
                     return true;
@@ -829,7 +846,7 @@ public class LevelTerrain : MonoBehaviour {
             }
 
             if (neighbourg.isAccessible || atk == AtkSys.Ranged)
-                if (searchForTargets(neighbourg, index - 1, atk)) return true;
+                if (searchForTargets(neighbourg, index - 1, atk, playerOrNot)) return true;
             neighbourg = null;
         }
 
@@ -844,7 +861,7 @@ public class LevelTerrain : MonoBehaviour {
             if (neighbourg.GetState() == CellState.occupied)
             {
                 BasePawn target = _manager.getPawnByLocation(neighbourg.BoardPosition);
-                if (target != null && !target.isPlayer)
+                if (target != null && target.isPlayer != playerOrNot)
                 {
                     //neighbourg.SetState(CellState.attackable);
                     return true;
@@ -854,7 +871,7 @@ public class LevelTerrain : MonoBehaviour {
             }
 
             if (neighbourg.isAccessible || atk == AtkSys.Ranged)
-                if (searchForTargets(neighbourg, index - 1, atk)) return true;
+                if (searchForTargets(neighbourg, index - 1, atk, playerOrNot)) return true;
             neighbourg = null;
         }
 
@@ -872,13 +889,30 @@ public class LevelTerrain : MonoBehaviour {
         }
     }
 
-    public void refreshOccupationMap() {
-        if (_manager.Pawns.Count > 0) {
+    public void refreshOccupationMap()
+    {
+        if (_manager.Pawns.Count > 0)
+        {
             Cell c;
-            foreach (BasePawn p in _manager.Pawns) {
+            foreach (BasePawn p in _manager.Pawns)
+            {
                 c = GetCellByPosition(p.PawnLocation);
                 if (c != null && c.GetState() != CellState.selected)
                     c.SetState(CellState.occupied);
+            }
+        }
+
+        BasePawn pp;
+        foreach (Cell cc in _lstCells)
+        {
+            pp = _manager.getPawnByLocation(cc.BoardPosition);
+            if (pp == null && (cc.GetState() == CellState.selected || cc.GetState() == CellState.occupied))
+            {
+                cc.SetState(CellState.free);
+            }
+            else if (pp != null && cc.GetState() != CellState.occupied)
+            {
+                cc.SetState(CellState.occupied);
             }
         }
     }
@@ -974,7 +1008,7 @@ public class LevelTerrain : MonoBehaviour {
 
                         refreshOccupationMap();
                         if (!selectedPawn.hasAlreadyMoved) HighlightNeighbourgs(_currentSelected, selectedPawn.moveRange, selectedPawn.PawnType == "Winged");
-                        HighlightTargetables(_currentSelected, selectedPawn.attackRange, _currentSelectedPawn.attackType);
+                        HighlightTargetables(_currentSelected, selectedPawn.attackRange, selectedPawn.attackType, selectedPawn.isPlayer);
                     }
                 } else if (hit.collider.GetComponent<Cell>() != null) {
                     Cell selectedCell = hit.collider.GetComponent<Cell>();
