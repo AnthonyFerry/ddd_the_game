@@ -61,6 +61,8 @@ public class BasePawn : MonoBehaviour {
         isPlayer = datum.isPlayer;
         attackType = _type.attackType;
 
+        GetComponentInChildren<MeshRenderer>().materials[0].color = isPlayer ? Color.green : Color.red;
+
         _worldPosition = datum.location;
         _location = datum.boardPosition;
 

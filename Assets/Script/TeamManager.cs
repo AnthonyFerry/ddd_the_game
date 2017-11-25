@@ -21,10 +21,6 @@ public class TeamManager : SingletonPersistent<TeamManager> {
         SaveManager.Load();
 
         if (panel == null) return;
-
-        GetPawnSelectors();
-
-        DisplayCurrentTeam();
     }
 
     public void ValidateTeam()

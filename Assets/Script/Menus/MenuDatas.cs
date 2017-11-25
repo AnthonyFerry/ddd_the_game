@@ -7,7 +7,7 @@ public class MenuDatas : SingletonPersistent<MenuDatas> {
 
     public List<World> worlds;
     public int selectedWorld = 0;
-    public string selectedLevel = "";
+    public Level selectedLevel = null;
 
     public World GetWorld(int id)
     {
@@ -16,12 +16,6 @@ public class MenuDatas : SingletonPersistent<MenuDatas> {
                 return world;
 
         return null;
-    }
-
-    public void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.A))
-            UnlockNextLevel();
     }
 
     public World GetWorld(string name)
@@ -58,7 +52,7 @@ public class MenuDatas : SingletonPersistent<MenuDatas> {
         return world;
     }
 
-    public void UnlockNextLevel()
+    public Level UnlockNextLevel()
     {
         foreach (Level level in worlds[selectedWorld].levels)
         {
@@ -66,9 +60,29 @@ public class MenuDatas : SingletonPersistent<MenuDatas> {
             {
                 level.isLocked = false;
                 SaveManager.SaveProgression();
-                return;
+                return level;
             }
         }
+
+        return null;
+    }
+
+    public Level GetNextLevel()
+    {
+        var world = GetWorld(selectedWorld);
+
+        int index = world.levels.IndexOf(selectedLevel);
+
+        index++;
+
+        if (index > world.levels.Count)
+            return null;
+
+        Level newLevel = world.levels[index];
+
+        
+
+        return newLevel;
     }
 }
 

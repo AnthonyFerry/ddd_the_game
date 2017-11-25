@@ -15,13 +15,15 @@ public class Assassin : BasePawn {
     }
 
     public override bool atkFunction(BasePawn target)
-    {
-        AudioManager.Play(type.SoundName);
+    {   
         //if not next to the target, can move to the closer position
         //moveFunction(_movements.findNearestDestination(target.PawnLocation));
         //return base.atkFunction(target);
         int totalDamages = this.dealDamages(target.PawnType) * criticalHit();
-        return target.takeDamages(totalDamages);
+        bool result = target.takeDamages(totalDamages);
+        if (GameManager.Instance.getRemainingOpponentsAmount(this.isPlayer) > 0 && result) GameManager.Instance.TurnTransition();
+
+        return result;
     }
 
     int criticalHit() {

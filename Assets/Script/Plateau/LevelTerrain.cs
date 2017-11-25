@@ -90,7 +90,7 @@ public class LevelTerrain : MonoBehaviour {
 
     int[,] LoadCSVDatasAsIntArray()
     {
-        TextAsset file = (TextAsset)Resources.Load(MenuDatas.Instance.selectedLevel) as TextAsset;
+        TextAsset file = (TextAsset)Resources.Load(MenuDatas.Instance.selectedLevel.resourceName) as TextAsset;
         string fileText = file.text;
 
         Debug.Log(fileText);

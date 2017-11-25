@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class MenuManager : MonoBehaviour {
 
     public List<Menu> menus = new List<Menu>();
+    public GameObject quitPanel;
     public GameObject buttonPrefab;
 
     Menu _currentMenu = null;
@@ -24,6 +25,12 @@ public class MenuManager : MonoBehaviour {
     {
         if (!AudioManager.IsPlaying("main"))
             AudioManager.Play("Main Theme", false, "main");
+
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            quitPanel.SetActive(true);
+        }
     }
 
     // Functions
@@ -66,7 +73,7 @@ public class MenuManager : MonoBehaviour {
         MenuDatas.Instance.selectedWorld = id;
     }
 
-    void LoadLevel(string levelResource)
+    void LoadLevel(Level levelResource)
     {
         MenuDatas.Instance.selectedLevel = levelResource;
         SceneManager.LoadScene(1);
@@ -109,8 +116,13 @@ public class MenuManager : MonoBehaviour {
                 text.text = "Niveau " + level.name;
 
 
-                buttonScript.onClick.AddListener(() => LoadLevel(level.resourceName));
+                buttonScript.onClick.AddListener(() => LoadLevel(level));
             }
         }
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 }

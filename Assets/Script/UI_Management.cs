@@ -42,6 +42,13 @@ public class UI_Management : SwissArmyKnife.Singleton<UI_Management> {
 		
 	}
 	
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+            SceneManager.LoadScene(0);
+
+    }
+
 	void FixedUpdate () {
         if (_manager.Locker == GameState.locked)
         {
@@ -130,7 +137,21 @@ public class UI_Management : SwissArmyKnife.Singleton<UI_Management> {
 
     public void OC_Continue()
     {
+        Level nextLevel = null;
 
+        if ((nextLevel = MenuDatas.Instance.UnlockNextLevel()) == null)
+            if ((nextLevel = MenuDatas.Instance.GetNextLevel()) == null)
+                return;
+
+        if (nextLevel == null)
+        {
+            SceneManager.LoadScene(0);
+        }
+        else
+        {
+            MenuDatas.Instance.selectedLevel = nextLevel;
+            SceneManager.LoadScene(1);
+        }
     }
 
 }

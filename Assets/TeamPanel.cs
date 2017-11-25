@@ -7,7 +7,13 @@ public class TeamPanel : MonoBehaviour {
 
 	void OnEnable()
     {
+        TeamManager.Instance.panel = this.gameObject;
+
         TeamManager.Instance.DisplayCurrentTeam();
-        Debug.Log("pute");
+    }
+
+    public void ValidateTeam()
+    {
+        TeamManager.Instance.ValidateTeam();
     }
 }
