@@ -21,8 +21,13 @@ public class Assassin : BasePawn {
         //return base.atkFunction(target);
         int totalDamages = this.dealDamages(target.PawnType) * criticalHit();
         bool result = target.takeDamages(totalDamages);
-        if (GameManager.Instance.getRemainingOpponentsAmount(this.isPlayer) > 0 && result) GameManager.Instance.TurnTransition();
-
+        if (GameManager.Instance.getRemainingOpponentsAmount(this.isPlayer) > 0)
+        {
+            if (result || GameManager.Instance.getRemainingOpponentsAmount(this.isPlayer) > 1)
+            {
+                GameManager.Instance.TurnTransition();
+            }
+        }
         return result;
     }
 
