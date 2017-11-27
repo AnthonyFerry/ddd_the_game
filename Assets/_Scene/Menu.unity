@@ -1415,7 +1415,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 128, y: -128}
-  m_SizeDelta: {x: 784, y: 310}
+  m_SizeDelta: {x: 850, y: 310}
   m_Pivot: {x: 0, y: 1.000001}
 --- !u!114 &374117931
 MonoBehaviour:
@@ -1437,12 +1437,12 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 1b9b3c04765250541b762817c18c6b18, type: 3}
     m_FontSize: 14
     m_FontStyle: 0
     m_BestFit: 1
     m_MinSize: 10
-    m_MaxSize: 96
+    m_MaxSize: 60
     m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -1925,10 +1925,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   worlds:
-  - name: Monde 1
+  - name: Tutoriel
     isLocked: 1
     id: 0
-    password: 
+    password: tuto
     levels:
     - name: 1
       isLocked: 1
@@ -1939,10 +1939,10 @@ MonoBehaviour:
     - name: 3
       isLocked: 1
       resourceName: map_00_03
-  - name: Monde 2
+  - name: SSB Melee
     isLocked: 1
     id: 1
-    password: MotDePasse1
+    password: bowser
     levels:
     - name: 1
       isLocked: 1
@@ -1953,10 +1953,10 @@ MonoBehaviour:
     - name: 3
       isLocked: 1
       resourceName: map_01_03
-  - name: Monde 3
+  - name: Street Fighters
     isLocked: 1
     id: 2
-    password: MotDePasse2
+    password: vert
     levels:
     - name: 1
       isLocked: 1
@@ -1967,10 +1967,10 @@ MonoBehaviour:
     - name: 3
       isLocked: 1
       resourceName: map_02_03
-  - name: Monde 4
+  - name: Sega
     isLocked: 1
     id: 3
-    password: MotDePasse3
+    password: 1991
     levels:
     - name: 1
       isLocked: 1
@@ -1981,10 +1981,10 @@ MonoBehaviour:
     - name: 3
       isLocked: 1
       resourceName: map_03_03
-  - name: Monde 5
+  - name: Crash B.
     isLocked: 1
     id: 4
-    password: MotDePasse4
+    password: arctic antics
     levels:
     - name: 1
       isLocked: 1
@@ -3469,7 +3469,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 128, y: -128}
-  m_SizeDelta: {x: 784, y: 310}
+  m_SizeDelta: {x: 900, y: 310}
   m_Pivot: {x: 0, y: 1.000001}
 --- !u!114 &819097072
 MonoBehaviour:
@@ -3491,12 +3491,12 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 1b9b3c04765250541b762817c18c6b18, type: 3}
     m_FontSize: 14
     m_FontStyle: 0
     m_BestFit: 1
     m_MinSize: 10
-    m_MaxSize: 96
+    m_MaxSize: 60
     m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -5077,7 +5077,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: adc400f14daac8c4bb86fa45b94bbca5, type: 3}
     m_FontSize: 14
     m_FontStyle: 0
     m_BestFit: 1
@@ -5090,7 +5090,8 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: "Ce jeu \xE0 \xE9t\xE9 r\xE9alis\xE9 b\xE9n\xE9volement pour l'occasion
-    des 15 ans du Don Des Dragons.\n\nFlorian Rouget / Anthony Ferry"
+    des 15 ans du Don Des Dragons (en 1 mois sivoupl\xE9).\n\nFlorian Rouget / Anthony
+    Ferry"
 --- !u!222 &1124311576
 CanvasRenderer:
   m_ObjectHideFlags: 0

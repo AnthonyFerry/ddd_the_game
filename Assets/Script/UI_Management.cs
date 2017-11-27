@@ -140,8 +140,8 @@ public class UI_Management : SwissArmyKnife.Singleton<UI_Management> {
         Level nextLevel = null;
 
         if ((nextLevel = MenuDatas.Instance.UnlockNextLevel()) == null)
-            if ((nextLevel = MenuDatas.Instance.GetNextLevel()) == null)
-                return;
+            nextLevel = MenuDatas.Instance.GetNextLevel();
+                
 
         if (nextLevel == null)
         {

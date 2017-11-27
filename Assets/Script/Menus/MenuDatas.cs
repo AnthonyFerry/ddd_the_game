@@ -75,7 +75,7 @@ public class MenuDatas : SingletonPersistent<MenuDatas> {
 
         index++;
 
-        if (index > world.levels.Count)
+        if (index >= world.levels.Count)
             return null;
 
         Level newLevel = world.levels[index];
